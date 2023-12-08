@@ -7,9 +7,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] PlayerInfo info;
 
     [SerializeField] private CharacterController controller;
-    [SerializeField] private Vector3 dir = Vector3.zero;
+    public Vector3 dir = Vector3.zero;
 
-    public float speed = 5.0f;
+    public float maxSpeed = 7.5f;
     public float jumpForce = 13.0f;
     public float antiBump = 4.5f;
     public float gravity = 30.0f;
@@ -39,12 +39,14 @@ public class PlayerMovement : MonoBehaviour
 
         if (controller.isGrounded)
         {
-            float currSpeedX =  Input.GetAxis("Vertical") * speed;
-            float currSpeedY = Input.GetAxis("Horizontal") * speed;
+            float currSpeedX =  Input.GetAxis("Vertical") * maxSpeed;
+            float currSpeedY = Input.GetAxis("Horizontal") * maxSpeed;
 
             dir = (forward * currSpeedX) + (right * currSpeedY);
+            dir = Vector3.ClampMagnitude(dir, maxSpeed);
             dir.y = -antiBump;
 
+            Debug.Log("dir:" + dir);
             if (Input.GetKey(KeyCode.Space))
                 Jump();
         }
