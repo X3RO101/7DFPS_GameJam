@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CameraSway : MonoBehaviour
 {
+    [SerializeField] private PlayerInfo playerInfo;
+
+    [Header("Bobbing")]
     [SerializeField, Range(0, 0.1f)] private float amplitude = 0.015f;
     [SerializeField, Range(0, 30f)] private float frequency = 10f;
 
@@ -14,6 +17,12 @@ public class CameraSway : MonoBehaviour
     private Vector3 startPos;
     [SerializeField] private CharacterController controller;
 
+    [Header("Leaning")]
+    [SerializeField] private Transform leanPivot;
+    [SerializeField] private float leanAngle;
+    [SerializeField] private float leanSmoothing;
+    private float currentLean;
+    private float targetLean;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +33,7 @@ public class CameraSway : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CalculateLeaning();
         CheckMotion();
         ResetPosition();
         cam.LookAt(FocusTarget());
@@ -63,5 +73,19 @@ public class CameraSway : MonoBehaviour
         Vector3 pos = new Vector3(transform.position.x, transform.position.y + camHolder.localPosition.y, transform.position.z);
         pos += camHolder.forward * 15.0f;
         return pos;
+    }
+
+    private void CalculateLeaning()
+    {
+        if (Input.GetAxis("Horizontal") > 0.25f)
+            targetLean = -leanAngle;
+        else if (Input.GetAxis("Horizontal") < -0.25f)
+            targetLean = leanAngle;
+        else
+            targetLean = 0;
+
+
+        currentLean = Mathf.Lerp(currentLean, targetLean, leanSmoothing);
+        leanPivot.localRotation = Quaternion.Euler(new Vector3(0, 0, currentLean));
     }
 }
