@@ -46,7 +46,6 @@ public class PlayerMovement : MonoBehaviour
             dir = Vector3.ClampMagnitude(dir, maxSpeed);
             dir.y = -antiBump;
 
-            Debug.Log("dir:" + dir);
             if (Input.GetKey(KeyCode.Space))
                 Jump();
         }

@@ -592,6 +592,7 @@ GameObject:
   - component: {fileID: 826671604}
   - component: {fileID: 826671603}
   - component: {fileID: 826671602}
+  - component: {fileID: 826671606}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -687,6 +688,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &826671606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826671601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fb39d0331f10f94ebb4b16a1f9c04f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movement: {fileID: 0}
+  camSway: {fileID: 0}
+  mouseLook: {fileID: 0}
 --- !u!1 &1218065575
 GameObject:
   m_ObjectHideFlags: 0
@@ -854,7 +870,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc6f99289fdc2a46ad07f1c866f3613, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 826671601}
+  player: {fileID: 826671606}
   domainList:
   - {fileID: 8777815368153736325, guid: a47d9365382f439c8bd98c71b184e015, type: 3}
 --- !u!4 &1409566083

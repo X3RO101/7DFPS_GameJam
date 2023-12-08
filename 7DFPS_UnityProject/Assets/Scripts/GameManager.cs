@@ -5,10 +5,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager inst;
-    public GameObject player;
+    public PlayerInfo player;
     public List<GameObject> domainList;
-
-    private Vector3 playerPos;
 
     public enum ELEMENTS
     {
@@ -32,19 +30,13 @@ public class GameManager : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
-        playerPos = player.transform.position;
         StartCoroutine(DomainExpansion(ELEMENTS.FIRE));
     }
 
     // Update is called once per frame
     void Update()
     {
-        playerPos = player.transform.position;
-    }
 
-    public Vector3 getPlayerPos()
-    {
-        return playerPos;
     }
 
     IEnumerator DomainExpansion(ELEMENTS domain)

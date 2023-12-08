@@ -11,14 +11,15 @@ public class ZombieAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        target = GameManager.inst.getPlayerPos();
+        target = GameManager.inst.player.transform.position;
         agent = GetComponent<NavMeshAgent>();
+        //agent.destination = target;
     }
 
     // Update is called once per frame
     void Update()
     {
-		target = GameManager.inst.getPlayerPos();
-		agent.destination = target;
+        //target = GameManager.inst.player.transform.position;
+        agent.SetDestination(GameManager.inst.player.transform.position);
     }
 }
