@@ -43,6 +43,20 @@ public class GameplayManager : MonoBehaviour
         get { return hudInfo.crosshairGO; }
     }
 
+    //returns position of crosshair in 3D world space
+    public Vector3 crosshairToWorld
+    {
+        get
+        {
+            Vector3 pos = mainCam.ScreenToWorldPoint(new Vector3(
+                    crosshairGO.transform.position.x,
+                    crosshairGO.transform.position.y,
+                    0));
+
+            return pos;
+        }
+    }
+
     //returns ray/line of crosshair in 3d world space (mainly used for aiming, directing objects to real world space with crosshair)
     public Ray crosshairToRay
     {
