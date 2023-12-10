@@ -6,10 +6,11 @@ public class PlayerCombat : MonoBehaviour
 {
     public GameplayManager.ELEMENTS equippedElement = GameplayManager.ELEMENTS.LIGHTNING;
 
-    [SerializeField] private Transform projectileSpawnLocation = null;
+    [SerializeField] private Transform lightningProjectileSpawnLocation = null;
+    [SerializeField] private Transform iceProjectileSpawnLocation = null;
     [SerializeField] private float singleTargetFireCooldown = 0.25f;
     [SerializeField] private float singleTargetLightningCooldown = 1f;
-    [SerializeField] private float singleTargetIceCooldown = 0.1f;
+    [SerializeField] private float singleTargetIceCooldown = 0.5f;
 
     private float abilityCastTimer = 0.0f;
     private float abilityCooldown = 1f;
@@ -39,7 +40,7 @@ public class PlayerCombat : MonoBehaviour
         switch(elementType)
         {
             case GameplayManager.ELEMENTS.ICE:
-                if (Input.GetMouseButton(0))
+                if (Input.GetMouseButtonDown(0))
                 {
                     abilityCastTimer = 0.0f;
                     abilityCooldown = singleTargetIceCooldown;
@@ -79,7 +80,7 @@ public class PlayerCombat : MonoBehaviour
         float projectileSpeed = 20f;
         //Spawn it at specified position
         GameObject projectile = Instantiate(singleTargetLightningPrefab);
-        projectile.transform.position = projectileSpawnLocation.position;
+        projectile.transform.position = lightningProjectileSpawnLocation.position;
 
         Vector3 rotation = projectile.transform.rotation.eulerAngles;
         projectile.transform.rotation = Quaternion.Euler(rotation.x, transform.eulerAngles.y, rotation.z);
@@ -88,14 +89,13 @@ public class PlayerCombat : MonoBehaviour
 
     private void SingleTargetIce()
     {
-        float projectileSpeed = 50f;
         //Spawn it at specified position
-        GameObject projectile = Instantiate(singleTargetIcePrefab);
-        projectile.transform.position = projectileSpawnLocation.position;
+        GameObject projectile = Instantiate(singleTargetIcePrefab, transform);
+        projectile.transform.position = iceProjectileSpawnLocation.position;
 
         Vector3 rotation = projectile.transform.rotation.eulerAngles;
         projectile.transform.rotation = Quaternion.Euler(rotation.x, transform.eulerAngles.y, rotation.z);
-        projectile.GetComponent<Rigidbody>().AddForce(GameManager.inst.gpManager.crosshairToRay.direction * projectileSpeed, ForceMode.Impulse);
+        //projectile.GetComponent<Rigidbody>().AddForce(GameManager.inst.gpManager.crosshairToRay.direction * projectileSpeed, ForceMode.Impulse);
     }
 
     private void SingleTargetFire(GameObject enemy)
