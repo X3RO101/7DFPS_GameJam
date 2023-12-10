@@ -19,12 +19,9 @@ public class GameplayManager : MonoBehaviour
 	public float statAdditive = 0.0f; // how much to add the stats by
 
 
-	[HideInInspector]
-    public EnemyObjectPool enemyObjectPool;
-    [HideInInspector]
-    public WaveManager waveManager;
-    [HideInInspector]
-    public ScalingManager scalingManager;
+	[HideInInspector] public EnemyObjectPool enemyObjectPool;
+    [HideInInspector] public WaveManager waveManager;
+    [HideInInspector] public ScalingManager scalingManager;
     public Camera mainCam = null;
 
     public enum ELEMENTS
@@ -63,35 +60,7 @@ public class GameplayManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemyObjectPool = this.AddComponent<EnemyObjectPool>();
-		waveManager = this.AddComponent<WaveManager>();
-		scalingManager = this.AddComponent<ScalingManager>();
-		// Create different gameplayer element managers
-		//enemyObjectPool = new EnemyObjectPool();
-		//waveManager = new WaveManager();
-		//scalingManager = new ScalingManager();
-
-		// Init enemy object pool
-        enemyObjectPool.poolSize = poolSize;
-        for (int i = 0; i < enemyPrefabList.Count; ++i)
-        {
-            enemyObjectPool.enemyPrefabList.Add(enemyPrefabList[i]);
-        }
-        enemyObjectPool.Init();
-
-        // Init wave system       
-        waveManager.Init();
-        for (int i = 0; i < spawnPointList.Count; ++i)
-        {
-            waveManager.spawnPoints.Add(spawnPointList[i].GetComponent<SpawnPoint>());
-		}
-        waveManager.UpdateSpawnDistances(true);
-
-        // Init difficulty scaling system  
-        scalingManager.waveFrequency = waveFrequency;
-        scalingManager.statMultiplier = statMultiplier;
-        scalingManager.statAdditive = statAdditive;
-
+        //InitEnemySystem();
     }
 
     // Update is called once per frame
@@ -112,5 +81,34 @@ public class GameplayManager : MonoBehaviour
         GameObject temp = Instantiate(domainList[(int)domain], player.gameObject.transform);
         yield return new WaitForSeconds(12.0f);
         Destroy(temp);
+    }
+
+    private void InitEnemySystem()
+    {
+        // Create different gameplayer element managers
+        enemyObjectPool = this.AddComponent<EnemyObjectPool>();
+        waveManager = this.AddComponent<WaveManager>();
+        scalingManager = this.AddComponent<ScalingManager>();
+
+        // Init enemy object pool
+        enemyObjectPool.poolSize = poolSize;
+        for (int i = 0; i < enemyPrefabList.Count; ++i)
+        {
+            enemyObjectPool.enemyPrefabList.Add(enemyPrefabList[i]);
+        }
+        enemyObjectPool.Init();
+
+        // Init wave system       
+        waveManager.Init();
+        for (int i = 0; i < spawnPointList.Count; ++i)
+        {
+            waveManager.spawnPoints.Add(spawnPointList[i].GetComponent<SpawnPoint>());
+        }
+        waveManager.UpdateSpawnDistances(true);
+
+        // Init difficulty scaling system  
+        scalingManager.waveFrequency = waveFrequency;
+        scalingManager.statMultiplier = statMultiplier;
+        scalingManager.statAdditive = statAdditive;
     }
 }
