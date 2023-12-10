@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ScalingManager : MonoBehaviour
 {
+    public float scalingFrequency = 30.0f;
 
     public float waveFrequency = 3.0f; // how long to wait before spawning the next wave
     public int groupSpawnCount = 1; // how many spawners should we activate
@@ -67,7 +68,6 @@ public class ScalingManager : MonoBehaviour
     {
         if (enemyCount < 10 && timeElapsed >= 15.0f)
         {
-            Debug.Log("Increased enemy count");
             enemyCount = 10;
         }
         

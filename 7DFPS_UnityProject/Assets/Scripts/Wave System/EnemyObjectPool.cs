@@ -29,7 +29,6 @@ public class EnemyObjectPool : MonoBehaviour
 		}
 	}
 	
-
 	// Update is called once per frame
 	void Update()
     {

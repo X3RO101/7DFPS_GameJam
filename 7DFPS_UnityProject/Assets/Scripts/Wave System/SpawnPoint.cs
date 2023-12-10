@@ -23,11 +23,16 @@ public class SpawnPoint : MonoBehaviour
     public void SpawnZombie(int enemyCount, float statMultiplier, float statAdditive)
     {
         GameObject temp = null;
+        EnemyObject tempEnemyObj = null;
         for (int i = 0; i < enemyCount; ++i)
         {
             temp = GameManager.inst.gpManager.enemyObjectPool.GetPooledZombie();
-            temp.transform.position = this.transform.position;
-            // TO ADD ENEMY STATS CODE HERE, modify healthcomponent
+			tempEnemyObj = temp.GetComponent<EnemyObject>();
+			temp.transform.position = this.transform.position;
+            // TO ADD ENEMY STATS CODE HERE, modify healthcomponent, element etc
+            tempEnemyObj.hp.SetMaxHealth((int)((tempEnemyObj.hp.GetCurrentHealth() * statMultiplier) + statAdditive));
+            tempEnemyObj.hp.SetCurrentHealth(tempEnemyObj.hp.GetMaxHealth());
+            // Add damage code
             temp.SetActive(true);
         }
     }
