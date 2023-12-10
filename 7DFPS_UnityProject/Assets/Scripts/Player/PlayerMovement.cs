@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] PlayerInfo info;
 
     [SerializeField] private CharacterController controller;
-    public Vector3 dir = Vector3.zero;
+    public Vector3 movement = Vector3.forward;
 
     public float maxSpeed = 7.5f;
     public float jumpForce = 13.0f;
@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        controller.Move(dir * Time.deltaTime);
+        controller.Move(movement * Time.deltaTime);
     }
 
     private void DefaultMovement()
@@ -42,21 +42,21 @@ public class PlayerMovement : MonoBehaviour
             float currSpeedX =  Input.GetAxis("Vertical") * maxSpeed;
             float currSpeedY = Input.GetAxis("Horizontal") * maxSpeed;
 
-            dir = (forward * currSpeedX) + (right * currSpeedY);
-            dir = Vector3.ClampMagnitude(dir, maxSpeed);
-            dir.y = -antiBump;
+            movement = (forward * currSpeedX) + (right * currSpeedY);
+            movement = Vector3.ClampMagnitude(movement, maxSpeed);
+            movement.y = -antiBump;
 
             if (Input.GetKey(KeyCode.Space))
                 Jump();
         }
         else
         {
-            dir.y -= gravity * Time.deltaTime;
+            movement.y -= gravity * Time.deltaTime;
         }
     }
 
     private void Jump()
     {
-        dir.y += jumpForce;
+        movement.y += jumpForce;
     }
 }
