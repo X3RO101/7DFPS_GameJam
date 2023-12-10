@@ -13,13 +13,11 @@ public class ZombieAI : MonoBehaviour
     {
         target = GameManager.inst.gpManager.player.transform.position;
         agent = GetComponent<NavMeshAgent>();
-        //agent.destination = target;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //target = GameManager.inst.player.transform.position;
         agent.SetDestination(GameManager.inst.gpManager.player.transform.position);
     }
 }
