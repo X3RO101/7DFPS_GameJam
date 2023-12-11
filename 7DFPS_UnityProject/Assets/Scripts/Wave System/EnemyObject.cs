@@ -50,6 +50,7 @@ public class EnemyObject : MonoBehaviour
 				break;
 		}
 
+        // Test code for flashing white on damage
         if(bouncetime <= 0.0f)
         {
             FlashWhite();
@@ -59,7 +60,6 @@ public class EnemyObject : MonoBehaviour
         {
             bouncetime -= Time.deltaTime;
         }
-        
 	}
 
     // Changes the animation state of the enemy to the one specified
@@ -71,7 +71,7 @@ public class EnemyObject : MonoBehaviour
                 animator.SetTrigger("Walk");
                 break;
             case EnemyAnimationState.DAMAGED:
-                animator.SetTrigger("Damaged");
+                animator.SetTrigger("Damaged"); 
                 break;
             default:
                 break;
