@@ -42,6 +42,7 @@ public class SingleTargetIce : MonoBehaviour
                 for(int i = 0; i < arrowsRB.Count; i++)
                 {
                     arrowsRB[i].AddForce(GameManager.inst.gpManager.crosshairToRay.direction * projectileSpeed, ForceMode.Impulse);
+                    arrowsRB[i].GetComponent<BoxCollider>().enabled = true;
                 }
             }
         }

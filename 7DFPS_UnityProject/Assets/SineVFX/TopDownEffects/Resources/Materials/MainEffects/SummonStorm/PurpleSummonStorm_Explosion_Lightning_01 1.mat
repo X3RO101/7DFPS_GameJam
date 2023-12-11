@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6338696653555764097
+--- !u!114 &-2364143218363407539
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,21 +20,17 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SummonStorm_Explosion_GroundEmissive_01
-  m_Shader: {fileID: -6465566751694194690, guid: 28890434b7404a74095bc3cb05f55aed,
+  m_Name: PurpleSummonStorm_Explosion_Lightning_01 1
+  m_Shader: {fileID: -6465566751694194690, guid: d641899987d8f764da5c95549691ab93,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - _DISTORTIONENABLED_ON
-  - _RAMPENABLED_ON
+  m_ValidKeywords: []
   m_InvalidKeywords:
   - _DISSOLVETEXTUREFLIP_ON
-  - _DISTORTIONRADIALUSEOLDMETHOD_ON
-  - _DISTORTIONRADIAL_ON
-  - _DISTORTIONUSEOLDMETHOD_ON
-  - _DISTORTIONUVORSPHERICAL_ON
   - _EMISSIONVERTEXSTREAMENABLED_ON
+  - _FBPARTICLEFRAMECONTROLENABLED_ON
+  - _MVPARTICLEFRAMECONTROLENABLED_ON
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -46,11 +42,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _CustomColorMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _CustomColorMask1:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 89055bbbc6b943fd8065bad66c15c97d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DissolveMask:
@@ -62,7 +54,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Distortion:
-        m_Texture: {fileID: 2800000, guid: 57535fb8629b4c6eb8530d7d3664d59f, type: 3}
+        m_Texture: {fileID: 2800000, guid: b85d4fb2a25e432db829a643ba843ce3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DistortionFixMask:
+        m_Texture: {fileID: 2800000, guid: dc92c400d22b4166aa9e289419dd9fd4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DistortionMask:
@@ -77,8 +73,20 @@ Material:
         m_Texture: {fileID: 2800000, guid: 35bc48dad7fe46a4f82965e223b86f2e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _FBMainMask:
+        m_Texture: {fileID: 2800000, guid: 963536c8bea548a2ab8644b06905cb23, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MVMainMask:
+        m_Texture: {fileID: 2800000, guid: 08e1abfeac7047389ecb4107ab817318, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MVMainMaskMotionVectors:
+        m_Texture: {fileID: 2800000, guid: 7d5d6fa2b7c6896469c0720390ba7367, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainMask:
-        m_Texture: {fileID: 2800000, guid: fd4266a1481a41128583c0b6aa6b133e, type: 3}
+        m_Texture: {fileID: 2800000, guid: d9bf558840f64618b84ff10f17cab94f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -97,16 +105,8 @@ Material:
         m_Texture: {fileID: 2800000, guid: e0eef4858dee4453a2b1295b963a1dbb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SecondMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SecondMaskProfile:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _SecondaryMask:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 7201221bb2484375891942d3cbe8cbec, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _tex4coord:
@@ -140,59 +140,70 @@ Material:
     m_Ints: []
     m_Floats:
     - _CustomColorMaskAffectedByDynamics: 1
-    - _CustomColorMaskAffectedByDynamics1: 1
-    - _CustomColorMaskSwitch: 0
-    - _CustomColorMaskSwitch1: 0
+    - _CustomColorMaskEnabled: 0
+    - _CustomColorMaskSwitch: 1
     - _DISSOLVETEXTUREFLIP: 1
-    - _DISSOLVETEXTUREFLIPSwitch: 1
     - _DISSOLVETEXTURERADIAL: 0
     - _DISSOLVETEXTURERADIALEnabled: 0
-    - _DISSOLVETEXTURERADIALScaleU: 0.1
+    - _DISSOLVETEXTURERADIALScaleU: 0.2
     - _DISSOLVETEXTURERADIALScaleV: 1
-    - _DISTORTIONENABLED: 1
-    - _DISTORTIONRADIAL: 1
-    - _DISTORTIONRADIALOldMethodSwitch: 0
-    - _DISTORTIONRADIALScaleU: 0.125
+    - _DISTORTIONRADIAL: 0
+    - _DISTORTIONRADIALScaleU: 1
     - _DISTORTIONRADIALScaleV: 1
-    - _DISTORTIONRADIALUseOldMethod: 1
-    - _DISTORTIONUVORSPHERICAL: 1
-    - _DissolveExp: 1
-    - _DissolveExpReversed: 1
+    - _DISTORTIONRADIALUseOldMethod: 0
+    - _DISTORTIONUVORSPHERICAL: 0
+    - _DissolveExp: 8
+    - _DissolveExpReversed: 8
+    - _DissolveGFromMask: 0
+    - _DissolveGFromMaskExp: 4
     - _DissolveGlowAffectsRamp: 1
-    - _DissolveGlowAffectsRamp1: 1
     - _DissolveGlowAmount: 0
-    - _DissolveGlowOffset: 0.125
-    - _DissolveGlowPower: 1
+    - _DissolveGlowOffset: 0.25
+    - _DissolveGlowPower: 2
+    - _DissolveMaskRemapMin: -1
     - _DissolveMaskScale: 1
-    - _DissolveMaskSteepness: 0
-    - _DissolveTextureRandomMax: 1.1
-    - _DissolveTextureRandomMin: 0.9
-    - _DissolveTextureScale: 0.5
-    - _DissolveTextureScaleU: 1
-    - _DissolveTextureScaleV: 1
+    - _DissolveTextureRandomMax: 1
+    - _DissolveTextureRandomMin: 1
+    - _DissolveTextureScale: 1
+    - _DissolveTextureScaleU: 0.5
+    - _DissolveTextureScaleV: 0.5
     - _DistortionExp: 1
     - _DistortionMaskNegate: 0
     - _DistortionMaskVSMoveU: 0
     - _DistortionMaskVSMoveV: 0
-    - _DistortionPower: 1
-    - _DistortionRemapMax: 1
-    - _DistortionRemapMin: 0
-    - _DistortionScaleU: 1.5
-    - _DistortionScaleV: 1.5
+    - _DistortionPower: 0.05
+    - _DistortionScaleU: 2
+    - _DistortionScaleV: 2
     - _DistortionScrollSpeedU: 0
     - _DistortionScrollSpeedV: 0
-    - _DistortionSpheticalStyle: 0
     - _DistortionU: 1
-    - _DistortionUseOldMethod: 1
+    - _DistortionUseOldMethod: 0
     - _DistortionV: 1
     - _EMISSIONVERTEXSTREAMENABLED: 1
+    - _FBAnimationSpeed: 15
+    - _FBColums: 2
+    - _FBMainMaskExp: 1
+    - _FBMainMaskRotation: 0
+    - _FBPARTICLEFRAMECONTROLENABLED: 1
+    - _FBRandomFrame: 1
+    - _FBRows: 2
     - _FinalOpacityExp: 1
-    - _FinalOpacityExp1: 1
-    - _FinalOpacityPower: 2
-    - _FinalPower: 10
-    - _MainMaskExp: 2
-    - _MainMaskScaleU: 1
-    - _MainMaskScaleV: 1
+    - _FinalOpacityExp1: 1.125
+    - _FinalOpacityPower: 1
+    - _FinalPower: 11.3
+    - _MDFOU: 1
+    - _MDFOV: 1
+    - _MVAnimationSpeed: 15
+    - _MVColums: 2
+    - _MVDistortionFrameOffset: 0.001
+    - _MVDistortionPower: 0.001
+    - _MVMainMaskExp: 1
+    - _MVMainMaskRotation: 0
+    - _MVPARTICLEFRAMECONTROLENABLED: 1
+    - _MVRandomFrame: 1
+    - _MVRandomSpeed: 0.5
+    - _MVRows: 2
+    - _MainMaskExp: 1
     - _MainMaskScrollSpeedU: 0
     - _MainMaskScrollSpeedV: 0
     - _NOISE01RADIAL: 0
@@ -202,48 +213,40 @@ Material:
     - _NOISE01RADIALScaleV: 1
     - _NOISE01RADIALScaleV1: 1
     - _Noise01Exp: 1
-    - _Noise01Negate: 1
-    - _Noise01RandomMax: 1.1
-    - _Noise01RandomMin: 0.9
+    - _Noise01Negate: 0
+    - _Noise01RandomMax: 1
+    - _Noise01RandomMin: 1
     - _Noise01Scale: 1
     - _Noise01ScaleU: 1
     - _Noise01ScaleV: 1
     - _Noise01ScrollSpeed1: 0
     - _Noise01ScrollSpeedU: 0
-    - _Noise01ScrollSpeedV: 0
+    - _Noise01ScrollSpeedV: -0.15
     - _QueueControl: 0
     - _QueueOffset: 0
     - _RAMPAFFECTEDBYVERTEXCOLOR: 0
-    - _RAMPENABLED: 1
-    - _RadialDistortionNoisePower: -0.31
+    - _RAMPENABLED: 0
+    - _RadialDistortionNoisePower: 0
     - _RampAffectedByDynamics: 1
-    - _RampIgnoreVertexColor: 0
+    - _RampAffectedByOther: 1
     - _RampNoiseAmount: 1
-    - _RampOffsetExp: 1
-    - _RampOffsetMultiply: 1
+    - _RampOffsetExp: 3
+    - _RampOffsetMultiply: 0.5
     - _RampOffsetMultiply1: 1
-    - _SOFTPARTICLESENABLED: 0
-    - _SecondMaskAffectsDistortion: 0
-    - _SecondMaskAffectsNoise01Negate: 0
-    - _SecondMaskAffectsRamp: 0
-    - _SecondMaskBoostsEmission: 0
-    - _SecondMaskFractShrink: 1
-    - _SecondMaskFractSwitch: 0
-    - _SecondMaskNegate: 1
-    - _SecondMaskScaleU: 1
-    - _SecondMaskScaleV: 1
-    - _SecondMaskVSMoveU: 0
-    - _SecondMaskVSMoveV: 0
+    - _SecondaryMaskEnabled: 0
     - _SecondaryMaskNegate: 1
     - _SecondaryMaskVSMoveU: 0
+    - _SecondaryMaskVSMoveV: 0
     - _SecondayMaskVSMoveV: 0
-    - _SoftParticlesDistance: 0.2
     - __dirty: 0
+    - _testttttt: 0
     m_Colors:
     - _CustomColorMaskChannels: {r: 1, g: 0, b: 0, a: 0}
-    - _CustomColorMaskChannels1: {r: 1, g: 0, b: 0, a: 0}
-    - _FinalColor: {r: 1, g: 0.10620204, b: 0, a: 1}
-    - _MainMaskChannelsMultiply: {r: 1, g: 0, b: 0, a: 0}
+    - _FBMainMaskChannelsMultiply: {r: 1, g: 0, b: 0, a: 0}
+    - _FinalColor: {r: 0.8677801, g: 0.19900322, b: 0.9811321, a: 1}
+    - _MVMainMaskChannels: {r: 1, g: 0, b: 0, a: 0}
+    - _MVMainMaskChannelsMultiply: {r: 1, g: 0, b: 0, a: 0}
+    - _MainMaskChannelsMultiply: {r: 1, g: 1, b: 1, a: 0}
     - _Noise01ScrollSpeedUV: {r: 1, g: 1, b: 0, a: 0}
-    - _RampColorTint: {r: 0.95092964, g: 0, b: 1, a: 1}
+    - _RampColorTint: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
