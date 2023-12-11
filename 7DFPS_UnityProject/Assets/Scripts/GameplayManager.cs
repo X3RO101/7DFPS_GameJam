@@ -26,8 +26,8 @@ public class GameplayManager : MonoBehaviour
 
     public enum ELEMENTS
     {
-        FIRE = 0,
-        ICE,
+        ICE = 0,
+        FIRE,
         LIGHTNING
     };
     
@@ -74,7 +74,7 @@ public class GameplayManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InitEnemySystem();
+        //InitEnemySystem();
     }
 
     // Update is called once per frame
