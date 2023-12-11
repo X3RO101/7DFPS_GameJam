@@ -7,7 +7,11 @@ public class PlayerCombat : MonoBehaviour
 {
     public GameplayManager.ELEMENTS equippedElement = GameplayManager.ELEMENTS.LIGHTNING;
     public bool aoeMode = false;
+    public int iceAmmo = 35;
+    public int fireAmmo = 50;
+    public int lightningAmmo = 15;
 
+    [Space(10)]
     [SerializeField] private Transform lightningProjectileSpawnLocation = null;
     [SerializeField] private Transform iceProjectileSpawnLocation = null;
     
@@ -128,6 +132,9 @@ public class PlayerCombat : MonoBehaviour
         switch(elementType)
         {
             case GameplayManager.ELEMENTS.ICE:
+                if (iceAmmo == 0)
+                    break;
+                
                 if (Input.GetMouseButtonDown(0))
                 {
                     abilityCastTimer = 0.0f;
@@ -137,6 +144,9 @@ public class PlayerCombat : MonoBehaviour
 
                 break;
             case GameplayManager.ELEMENTS.FIRE:
+                if (fireAmmo == 0)
+                    break;
+
                 if (Input.GetMouseButtonDown(0))
                 {
                     //float fireRange = 20f;
@@ -154,6 +164,9 @@ public class PlayerCombat : MonoBehaviour
                 }
                 break;
             case GameplayManager.ELEMENTS.LIGHTNING:
+                if (lightningAmmo == 0)
+                    break;
+
                 if (Input.GetMouseButtonDown(0))
                 {
                     abilityCastTimer = 0.0f;

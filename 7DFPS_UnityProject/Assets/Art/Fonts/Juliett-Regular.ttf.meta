@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: 6cffc13300ddd0d4db9787480a6ded76
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Juliett
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 22df598426b42f44fb03e4785aa8b520, type: 3}
+  - {fileID: 12800000, guid: e6cab57dfe7b8734b8cfa709dde1dc36, type: 3}
+  - {fileID: 12800000, guid: 04bd009e50eaccf41b11a70a0e9b8032, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
