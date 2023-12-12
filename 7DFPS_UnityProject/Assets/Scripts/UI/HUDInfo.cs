@@ -26,6 +26,10 @@ public class HUDInfo : MonoBehaviour
     [Header("UI Colors")]
     [SerializeField] private Color panelSelectedColor = Color.yellow;
     [SerializeField] private Color panelDefaultColor = Color.white;
+    [SerializeField] private Color damageIndicatorCritColor = Color.yellow;
+
+    [Header("Damage indicator")]
+    [SerializeField] private GameObject damageIndicatorPrefab = null;
 
     private void FixedUpdate()
     {
@@ -118,5 +122,10 @@ public class HUDInfo : MonoBehaviour
 
         elementAOEContainers[(int)elementType].DOFade(targetAlpha, 0.1f);
         elementAOEContainers[(int)elementType].transform.DOLocalMoveY(pos.y, 0.25f);
+    }
+    public DamageNumber SpawnDamageIndicator()
+    {
+        DamageNumber damageIndicator = Instantiate(damageIndicatorPrefab).GetComponent<DamageNumber>();
+        return damageIndicator;
     }
 }

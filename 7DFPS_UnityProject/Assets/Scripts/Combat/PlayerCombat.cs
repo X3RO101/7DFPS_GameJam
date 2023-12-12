@@ -307,5 +307,8 @@ public class PlayerCombat : MonoBehaviour
         fireSword.target = enemy;
         fireSword.source = gameObject;
         fireSword.PlayAnimation();
+
+        DamageNumber damageUI = GameManager.inst.gpManager.hudInfo.SpawnDamageIndicator();
+        damageUI.InitDamageIndicator(10, enemy.transform, Color.yellow);
     }
 }
