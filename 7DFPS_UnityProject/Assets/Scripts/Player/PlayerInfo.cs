@@ -9,4 +9,5 @@ public class PlayerInfo : MonoBehaviour
     public CameraSway camSway;
     public MouseLook mouseLook;
     public int hp;
+    public int maxHP;
 }

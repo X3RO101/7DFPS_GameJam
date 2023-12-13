@@ -10,6 +10,17 @@ public class PlayerCombat : MonoBehaviour
     public int iceAmmo = 35;
     public int fireAmmo = 50;
     public int lightningAmmo = 15;
+    public int maxIceAmmo = 35;
+    public int maxFireAmmo = 50;
+    public int maxLightningAmmo = 15;
+
+    [Header("Ability cost")]
+    public int singleTargetIceCost = 5;
+    public int singleTargetFireCost = 1;
+    public int singleTargetLightningCost = 1;
+    public int aoeIceCost = 25;
+    public int aoeFireCost = 30;
+    public int aoeLightningCost = 10;
 
     [Space(10)]
     [SerializeField] private Transform lightningProjectileSpawnLocation = null;
@@ -43,32 +54,92 @@ public class PlayerCombat : MonoBehaviour
 
     private void Start()
     {
-        
     }
 
     private void Update()
     {
-        //Toggle AOE mode
+        SwapElement(); //Call to swap elements if input key
+
+
+        //Toggles AOE mode
         if(Input.GetMouseButtonDown(1))
         {
-            aoeMode = !aoeMode;
-            aoeIndicator.SetActive(aoeMode);
+            //Check if player can even use anything in AOE mode
+            if(CanAOE(equippedElement))
+            {
+                aoeMode = !aoeMode;
+                aoeIndicator.SetActive(aoeMode);
+                GameManager.inst.gpManager.hudInfo.SetCrosshairEnable(!aoeMode);    //Disable crosshair
+            }
         }
 
+        //Renders indicator if in AOE mode
         if(aoeMode)
         {
             UpdateIndicator(); //Updates position of indicator
         }
 
+        //Timer for player abilities
         if(abilityCastTimer < abilityCooldown)
             abilityCastTimer += 1f * Time.deltaTime;
         else
         {
+            //Use AOE abilities over single target attacks if in AOE mode
             if (aoeMode)
                 AOEAttacks(equippedElement);
             else
                 SingleTargetAttacks(equippedElement);
         }
+    }
+    //returns true if specified element type has sufficient ammo to cast aoe
+    public bool CanAOE(GameplayManager.ELEMENTS elementType)
+    {
+        if(elementType == GameplayManager.ELEMENTS.ICE)
+        {
+            if (iceAmmo >= aoeIceCost)
+                return true;
+            else 
+                return false;
+        }
+        else if(elementType == GameplayManager.ELEMENTS.FIRE)
+        {
+            if (fireAmmo >= aoeFireCost)
+                return true;
+            else
+                return false;
+        }
+        else if (elementType == GameplayManager.ELEMENTS.LIGHTNING)
+        {
+            if (lightningAmmo >= aoeLightningCost)
+                return true;
+            else
+                return false;
+        }
+
+        return false;
+    }
+    private void SwapElement()
+    {
+        GameplayManager.ELEMENTS previousElement = equippedElement;
+        if(Input.GetKey(KeyCode.Alpha1))
+        {
+            equippedElement = GameplayManager.ELEMENTS.ICE;
+            GameManager.inst.gpManager.hudInfo.UpdateCrosshair(equippedElement);
+            GameManager.inst.gpManager.hudInfo.UpdateElementContainer(equippedElement, previousElement);
+        }
+        else if(Input.GetKey(KeyCode.Alpha2))
+        {
+            equippedElement = GameplayManager.ELEMENTS.FIRE;
+            GameManager.inst.gpManager.hudInfo.UpdateCrosshair(equippedElement);
+            GameManager.inst.gpManager.hudInfo.UpdateElementContainer(equippedElement, previousElement); 
+        }
+        else if(Input.GetKey(KeyCode.Alpha3))
+        {
+            equippedElement = GameplayManager.ELEMENTS.LIGHTNING;
+            GameManager.inst.gpManager.hudInfo.UpdateCrosshair(equippedElement);
+            GameManager.inst.gpManager.hudInfo.UpdateElementContainer(equippedElement, previousElement);
+        }
+
     }
     private void UpdateIndicator()
     {
@@ -80,38 +151,61 @@ public class PlayerCombat : MonoBehaviour
     }
     private void AOEAttacks(GameplayManager.ELEMENTS elementType)
     {
+        //Check if have sufficient resources to cast AOE, if no: return.
+        if (!CanAOE(elementType))
+            return;
+
         switch (elementType)
         {
             case GameplayManager.ELEMENTS.ICE:
                 if (Input.GetMouseButtonDown(0))
                 {
+                    iceAmmo -= aoeIceCost;
                     abilityCastTimer = 0.0f;
                     abilityCooldown = aoeIceCooldown;
                     AOEIce();
+                    //Disable indicator after using ability
+                    aoeMode = false;
+                    aoeIndicator.SetActive(false);
+                    //Enable crosshair again
+                    GameManager.inst.gpManager.hudInfo.SetCrosshairEnable(true);
                 }
 
                 break;
             case GameplayManager.ELEMENTS.FIRE:
                 if (Input.GetMouseButtonDown(0))
                 {
+                    fireAmmo -= aoeFireCost;
                     abilityCastTimer = 0.0f;
                     abilityCooldown = aoeFireCooldown;
                     AOEFire();
+                    //Disable indicator after using ability
+                    aoeMode = false;
+                    aoeIndicator.SetActive(false);
+                    //Enable crosshair again
+                    GameManager.inst.gpManager.hudInfo.SetCrosshairEnable(true);
                 }
                 break;
             case GameplayManager.ELEMENTS.LIGHTNING:
                 if (Input.GetMouseButtonDown(0))
                 {
+                    lightningAmmo -= aoeLightningCost;
                     abilityCastTimer = 0.0f;
                     abilityCooldown = aoeLightningCooldown;
                     AOELightning();
+                    //Disable indicator after using ability
+                    aoeMode = false;
+                    aoeIndicator.SetActive(false);
+                    //Enable crosshair again
+                    GameManager.inst.gpManager.hudInfo.SetCrosshairEnable(true);
                 }
                 break;
             default:
                 break;
         }
+        //Updates the ammo to UI after use of abilities
+        GameManager.inst.gpManager.hudInfo.UpdateAmmoCounter(iceAmmo, fireAmmo, lightningAmmo);
     }
-
     private void AOEFire()
     {
         GameObject aoe = Instantiate(aoeFirePrefab);
@@ -137,6 +231,8 @@ public class PlayerCombat : MonoBehaviour
                 
                 if (Input.GetMouseButtonDown(0))
                 {
+                    iceAmmo -= singleTargetIceCost;
+
                     abilityCastTimer = 0.0f;
                     abilityCooldown = singleTargetIceCooldown;
                     SingleTargetIce();
@@ -160,6 +256,7 @@ public class PlayerCombat : MonoBehaviour
                     {
                         if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Enemy"))
                         {
+                            fireAmmo -= singleTargetFireCost;
 							SingleTargetFire(hit.collider.gameObject);
 							EnemyObject temp = hit.collider.gameObject.GetComponent<EnemyObject>();
 							temp.FlashWhite();
@@ -176,6 +273,7 @@ public class PlayerCombat : MonoBehaviour
 
                 if (Input.GetMouseButtonDown(0))
                 {
+                    lightningAmmo -= singleTargetLightningCost;
                     abilityCastTimer = 0.0f;
                     abilityCooldown = singleTargetLightningCooldown;
                     SingleTargetLightning();
@@ -184,8 +282,9 @@ public class PlayerCombat : MonoBehaviour
             default:
                 break;
         }
-    }
 
+        GameManager.inst.gpManager.hudInfo.UpdateAmmoCounter(iceAmmo, fireAmmo, lightningAmmo);
+    }
     private void SingleTargetLightning()
     {
         float projectileSpeed = 20f;
@@ -197,7 +296,6 @@ public class PlayerCombat : MonoBehaviour
         projectile.transform.rotation = Quaternion.Euler(rotation.x, transform.eulerAngles.y, rotation.z);
         projectile.GetComponent<Rigidbody>().AddForce(GameManager.inst.gpManager.crosshairToRay.direction * projectileSpeed, ForceMode.Impulse);
     }
-
     private void SingleTargetIce()
     {
         //Spawn it at specified position
@@ -208,7 +306,6 @@ public class PlayerCombat : MonoBehaviour
         projectile.transform.rotation = Quaternion.Euler(rotation.x, transform.eulerAngles.y, rotation.z);
         //projectile.GetComponent<Rigidbody>().AddForce(GameManager.inst.gpManager.crosshairToRay.direction * projectileSpeed, ForceMode.Impulse);
     }
-
     private void SingleTargetFire(GameObject enemy)
     {
         GameObject projectile = Instantiate(singleTargetFirePrefab);
@@ -217,5 +314,8 @@ public class PlayerCombat : MonoBehaviour
         fireSword.target = enemy;
         fireSword.source = gameObject;
         fireSword.PlayAnimation();
+
+        DamageNumber damageUI = GameManager.inst.gpManager.hudInfo.SpawnDamageIndicator();
+        damageUI.InitDamageIndicator(10, enemy.transform, Color.yellow);
     }
 }
