@@ -18,7 +18,11 @@ public class HealthComponent : MonoBehaviour
         if (currentHealth <= 0)
         {
             // Play death animation / particle system / sfx
-
+            EnemyObject tempEnemyObj = GetComponent<EnemyObject>();
+            if (tempEnemyObj != null)
+            {
+                tempEnemyObj.StopElementParticles();
+            }
             // Coroutine so that the effects above can finishing playing before we disable this gameobject
             StartCoroutine(Kill());
         }

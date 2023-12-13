@@ -79,17 +79,10 @@ public class GameplayManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Pause the game and open the upgrade panel
 		if (Input.GetKeyDown(KeyCode.P))
-        { 
-		    waveManager.spawnPoints[0].SpawnZombie(5, 1.0f, 0.0f, ELEMENTS.FIRE);
-		}
-		if (Input.GetKeyDown(KeyCode.O))
-		{
-			waveManager.spawnPoints[0].SpawnZombie(5, 1.0f, 0.0f, ELEMENTS.LIGHTNING);
-		}
-		if (Input.GetKeyDown(KeyCode.H))
-		{
-            StartCoroutine(DomainExpansion(ELEMENTS.FIRE));
+        {
+            UpgradeManager.inst.OpenUpgradePanel();
 		}
 	}
 

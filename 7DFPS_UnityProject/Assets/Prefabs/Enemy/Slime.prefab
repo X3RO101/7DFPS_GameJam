@@ -5239,13 +5239,26 @@ MonoBehaviour:
   hp: {fileID: 7674671021754053427}
   damage: 0
   normalMat: {fileID: 2100000, guid: 2df5e0cd83bff504bb1cb643cd6c2df5, type: 2}
-  damagedMat: {fileID: 2100000, guid: 9e4a26aa2a2c2d3478181e4c382f9e5a, type: 2}
   normalFace: {fileID: 2100000, guid: 34f66323bad5888449d48298d1a0927f, type: 2}
   damagedFace: {fileID: 2100000, guid: e5b17eff11a1ff5439237f806a519ae1, type: 2}
+  ps: {fileID: 0}
+  damagedMat: {fileID: 2100000, guid: 9e4a26aa2a2c2d3478181e4c382f9e5a, type: 2}
   elementMaterialList:
   - {fileID: 2100000, guid: 67450eac81410a54388beeeda04d456b, type: 2}
   - {fileID: 2100000, guid: f340c376d5620794ab70183af266e93b, type: 2}
   - {fileID: 2100000, guid: 817a8e8fe2ac91a4ead7585f28cedb06, type: 2}
+  normalFaceMaterialList:
+  - {fileID: 2100000, guid: 1f569764428cd714abe8f5c85e3e9191, type: 2}
+  - {fileID: 2100000, guid: 34f66323bad5888449d48298d1a0927f, type: 2}
+  - {fileID: 2100000, guid: f5c4e8744f97ef4468f92d8b6072bc15, type: 2}
+  damagedFaceMaterialList:
+  - {fileID: 2100000, guid: e5b17eff11a1ff5439237f806a519ae1, type: 2}
+  - {fileID: 2100000, guid: e5b17eff11a1ff5439237f806a519ae1, type: 2}
+  - {fileID: 2100000, guid: e5b17eff11a1ff5439237f806a519ae1, type: 2}
+  elementParticleList:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &7674671021754053427
 MonoBehaviour:
   m_ObjectHideFlags: 0
