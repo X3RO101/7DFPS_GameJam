@@ -22,6 +22,14 @@ public class PlayerCombat : MonoBehaviour
     public int aoeFireCost = 30;
     public int aoeLightningCost = 10;
 
+    [Header("Ability damage")]
+    public int singleTargetIceDamage = 50;          //Per arrow! there's 5 arrows so *5
+    public int singleTargetFireDamage = 50;
+    public int singleTargetLightningDamage = 250;
+    public int aoeIceDamage = 300;          
+    public int aoeFireDamage = 300;
+    public int aoeLightningDamage = 100;            //Per lightning strike
+
     [Space(10)]
     [SerializeField] private Transform lightningProjectileSpawnLocation = null;
     [SerializeField] private Transform iceProjectileSpawnLocation = null;
@@ -258,10 +266,6 @@ public class PlayerCombat : MonoBehaviour
                         {
                             fireAmmo -= singleTargetFireCost;
 							SingleTargetFire(hit.collider.gameObject);
-							EnemyObject temp = hit.collider.gameObject.GetComponent<EnemyObject>();
-							temp.FlashWhite();
-							// Change damage value, placeholder value = 1
-							temp.hp.SetCurrentHealth(temp.hp.GetCurrentHealth() - 1);
 						}
                             
                     }
@@ -315,7 +319,15 @@ public class PlayerCombat : MonoBehaviour
         fireSword.source = gameObject;
         fireSword.PlayAnimation();
 
+        //Calculate fire damage
+        int damage = singleTargetFireDamage + (int)Random.Range(-singleTargetFireDamage * 0.1f, singleTargetFireDamage * 0.1f);
+
         DamageNumber damageUI = GameManager.inst.gpManager.hudInfo.SpawnDamageIndicator();
-        damageUI.InitDamageIndicator(10, enemy.transform, Color.yellow);
+        damageUI.InitDamageIndicator(damage, enemy.transform, Color.white);
+
+        EnemyObject temp = enemy.gameObject.GetComponent<EnemyObject>();
+        temp.FlashWhite();
+        // Change damage value, placeholder value = 1
+        temp.hp.SetCurrentHealth(temp.hp.GetCurrentHealth() - damage);
     }
 }

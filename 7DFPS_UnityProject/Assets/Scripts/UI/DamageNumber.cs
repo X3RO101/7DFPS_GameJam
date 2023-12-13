@@ -24,7 +24,7 @@ public class DamageNumber : MonoBehaviour
     {
         //Initialize and set damge indicator's position and parent
         gameObject.transform.parent = enemyTransform;
-        gameObject.transform.localPosition = new Vector3(Random.Range(-0.25F,0.25F), 1.1f, 0f);
+        gameObject.transform.localPosition = new Vector3(Random.Range(-0.3F,0.3F), Random.Range(0.8f, 1f), 0f);
         text.text = damage.ToString();
         text.color = textColor;
 

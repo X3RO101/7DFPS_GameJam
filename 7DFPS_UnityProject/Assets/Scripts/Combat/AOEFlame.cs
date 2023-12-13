@@ -15,11 +15,18 @@ public class AOEFlame : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             //Attack enemies in here
+            //Calculate fire damage
+            int fireDamage = GameManager.inst.gpManager.player.combat.aoeFireDamage;
+            int damage = fireDamage + (int)Random.Range(-fireDamage * 0.1f, fireDamage * 0.1f);
+
+            DamageNumber damageUI = GameManager.inst.gpManager.hudInfo.SpawnDamageIndicator();
+            damageUI.InitDamageIndicator(damage, collision.gameObject.transform, Color.white);
+
             Debug.Log("Hit enemy");
             EnemyObject temp = collision.gameObject.GetComponent<EnemyObject>();
             temp.FlashWhite();
             // Change damage value, placeholder value = 1
-            temp.hp.SetCurrentHealth(temp.hp.GetCurrentHealth() - 1);
+            temp.hp.SetCurrentHealth(temp.hp.GetCurrentHealth() - damage);
 
         }
     }

@@ -22,7 +22,14 @@ public class AOEIce : MonoBehaviour
         {
             //Attack enemies in here
             Debug.Log("Hit enemy");
-			EnemyObject temp = collision.gameObject.GetComponent<EnemyObject>();
+            //Calculate ice damage
+            int iceDamage = GameManager.inst.gpManager.player.combat.aoeIceDamage;
+            int damage = iceDamage + (int)Random.Range(-iceDamage * 0.1f, iceDamage * 0.1f);
+
+            DamageNumber damageUI = GameManager.inst.gpManager.hudInfo.SpawnDamageIndicator();
+            damageUI.InitDamageIndicator(damage, collision.gameObject.transform, Color.white);
+
+            EnemyObject temp = collision.gameObject.GetComponent<EnemyObject>();
 			temp.FlashWhite();
 			// Change damage value, placeholder value = 1
 			temp.hp.SetCurrentHealth(temp.hp.GetCurrentHealth() - 1);

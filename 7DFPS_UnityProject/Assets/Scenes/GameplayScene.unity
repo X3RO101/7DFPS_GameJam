@@ -7535,6 +7535,12 @@ MonoBehaviour:
   aoeIceCost: 30
   aoeFireCost: 30
   aoeLightningCost: 10
+  singleTargetIceDamage: 50
+  singleTargetFireDamage: 50
+  singleTargetLightningDamage: 250
+  aoeIceDamage: 300
+  aoeFireDamage: 300
+  aoeLightningDamage: 100
   lightningProjectileSpawnLocation: {fileID: 910242870}
   iceProjectileSpawnLocation: {fileID: 1836526813}
   singleTargetFireCooldown: 0.05
@@ -40618,6 +40624,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FireSlime
+      objectReference: {fileID: 0}
+    - target: {fileID: 2750582282920720913, guid: 4a0f8c40d47f2cd4586948542118b97a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2750582282920720914, guid: 4a0f8c40d47f2cd4586948542118b97a,
         type: 3}

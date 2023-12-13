@@ -21,11 +21,18 @@ public class SingleTargetLightning : MonoBehaviour
             GameObject impact = Instantiate(impactPrefab);
             impact.transform.position = transform.position;
 
+            //Calculate lightning damage
+            int lightningDamage = GameManager.inst.gpManager.player.combat.singleTargetLightningDamage;
+            int damage = lightningDamage + (int)Random.Range(-lightningDamage * 0.1f, lightningDamage * 0.1f);
+
+            DamageNumber damageUI = GameManager.inst.gpManager.hudInfo.SpawnDamageIndicator();
+            damageUI.InitDamageIndicator(damage, collision.gameObject.transform, Color.white);
+
             // Enemy damage logic
-			EnemyObject temp = collision.gameObject.GetComponent<EnemyObject>();
+            EnemyObject temp = collision.gameObject.GetComponent<EnemyObject>();
 			temp.FlashWhite();
 			// Change damage value, placeholder value = 1
-			temp.hp.SetCurrentHealth(temp.hp.GetCurrentHealth() - 1);
+			temp.hp.SetCurrentHealth(temp.hp.GetCurrentHealth() - damage);
 		}
         else if(collision.gameObject.layer == LayerMask.NameToLayer("Obstacle") ||
             collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
