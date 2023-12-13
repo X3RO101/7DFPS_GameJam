@@ -240,6 +240,8 @@ public class PlayerCombat : MonoBehaviour
                 if (Input.GetMouseButtonDown(0))
                 {
                     iceAmmo -= singleTargetIceCost;
+                    if (iceAmmo < 0)
+                        iceAmmo = 0;
 
                     abilityCastTimer = 0.0f;
                     abilityCooldown = singleTargetIceCooldown;
@@ -265,7 +267,9 @@ public class PlayerCombat : MonoBehaviour
                         if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Enemy"))
                         {
                             fireAmmo -= singleTargetFireCost;
-							SingleTargetFire(hit.collider.gameObject);
+                            if (fireAmmo < 0)
+                                fireAmmo = 0;
+                            SingleTargetFire(hit.collider.gameObject);
 						}
                             
                     }
@@ -278,6 +282,9 @@ public class PlayerCombat : MonoBehaviour
                 if (Input.GetMouseButtonDown(0))
                 {
                     lightningAmmo -= singleTargetLightningCost;
+                    if (lightningAmmo < 0)
+                        lightningAmmo = 0;
+
                     abilityCastTimer = 0.0f;
                     abilityCooldown = singleTargetLightningCooldown;
                     SingleTargetLightning();
@@ -328,6 +335,12 @@ public class PlayerCombat : MonoBehaviour
         EnemyObject temp = enemy.gameObject.GetComponent<EnemyObject>();
         temp.FlashWhite();
         // Change damage value, placeholder value = 1
-        temp.hp.SetCurrentHealth(temp.hp.GetCurrentHealth() - damage);
+        temp.hp.SetCurrentHealth(temp.hp.GetCurrentHealth() - damage);            
+        
+        //Set enemy to fly backwards
+        enemy.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 5f, ForceMode.Impulse);
+        //Set object to stop moving for 0.1
+        temp.StopAgentMovement(0.15f);
+        temp.StopAnimation(0.15f);
     }
 }

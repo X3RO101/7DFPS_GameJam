@@ -32,8 +32,12 @@ public class AOEIce : MonoBehaviour
             EnemyObject temp = collision.gameObject.GetComponent<EnemyObject>();
 			temp.FlashWhite();
 			// Change damage value, placeholder value = 1
-			temp.hp.SetCurrentHealth(temp.hp.GetCurrentHealth() - 1);
-		}
+			temp.hp.SetCurrentHealth(temp.hp.GetCurrentHealth() - damage);        
+            
+            //Set object to stop moving for 0.1
+            temp.StopAgentMovement(0.35f);
+            temp.StopAnimation(0.35f);
+        }
     }
 
     private IEnumerator DestroyAOE()

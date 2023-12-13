@@ -28,7 +28,13 @@ public class IceArrow : MonoBehaviour
 			temp.FlashWhite();
 			// Change damage value, placeholder value = 1
 			temp.hp.SetCurrentHealth(temp.hp.GetCurrentHealth() - damage);
-		}
+
+            //Set enemy to fly backwards
+            collision.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 5f, ForceMode.Impulse);
+            //Set object to stop moving for 0.1
+            temp.StopAgentMovement(0.2f);
+            temp.StopAnimation(0.2f);
+        }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Obstacle") ||
             collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {

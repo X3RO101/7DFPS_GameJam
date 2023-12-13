@@ -12,14 +12,13 @@ public class SingleTargetFire : MonoBehaviour
     void Start()
     {
         StartCoroutine("DestroyProjectile");
-
-
     }
 
     public void PlayAnimation()
     {
         if(target != null)
         {
+            //Set position and distance from sword to object
             transform.position = new Vector3(target.transform.position.x, target.transform.position.y + Random.Range(1F,1.5F), target.transform.position.z);
             float dist = Vector3.Distance(target.transform.position, source.transform.position);
             Vector3 dir = Vector3.forward;

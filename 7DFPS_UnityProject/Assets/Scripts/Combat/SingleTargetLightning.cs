@@ -32,8 +32,13 @@ public class SingleTargetLightning : MonoBehaviour
             EnemyObject temp = collision.gameObject.GetComponent<EnemyObject>();
 			temp.FlashWhite();
 			// Change damage value, placeholder value = 1
-			temp.hp.SetCurrentHealth(temp.hp.GetCurrentHealth() - damage);
-		}
+			temp.hp.SetCurrentHealth(temp.hp.GetCurrentHealth() - damage);            
+            //Set enemy to fly backwards
+            collision.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 35f, ForceMode.Impulse);
+            //Set object to stop moving for 0.1
+            temp.StopAgentMovement(0.25f);
+            temp.StopAnimation(0.25f);
+        }
         else if(collision.gameObject.layer == LayerMask.NameToLayer("Obstacle") ||
             collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {

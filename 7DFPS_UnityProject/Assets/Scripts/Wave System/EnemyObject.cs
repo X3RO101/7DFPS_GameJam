@@ -96,7 +96,7 @@ public class EnemyObject : MonoBehaviour
         StartCoroutine(FlashOnHit());
     }
 
-    IEnumerator FlashOnHit()
+    private IEnumerator FlashOnHit()
     {
         Material[] damaged = { damagedMat, damagedFace };
         mr.materials = damaged;
@@ -104,5 +104,33 @@ public class EnemyObject : MonoBehaviour
 		Material[] normal = { normalMat, normalFace };
 		mr.materials = normal;
 		yield break;
+    }
+
+    public void StopAgentMovement(float time)
+    {
+        StartCoroutine(StopAgentMovementCoroutine(time));
+    }
+
+    private IEnumerator StopAgentMovementCoroutine(float time)
+    {
+        //Stop agent from moving
+        agent.isStopped = true;
+        yield return new WaitForSeconds(time);
+        agent.isStopped = false;
+        yield break;
+    }
+
+    public void StopAnimation(float time)
+    {
+        StartCoroutine(StopAnimationCoroutine(time));
+    }
+
+    private IEnumerator StopAnimationCoroutine(float time)
+    {
+        //disable animation being played
+        animator.enabled = false;
+        yield return new WaitForSeconds(time);
+        animator.enabled = true;
+        yield break;
     }
 }
