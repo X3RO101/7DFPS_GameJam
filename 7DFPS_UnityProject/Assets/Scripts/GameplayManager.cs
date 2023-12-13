@@ -18,7 +18,6 @@ public class GameplayManager : MonoBehaviour
 	public float statMultiplier = 1.0f; // how much to multiply the stats by
 	public float statAdditive = 0.0f; // how much to add the stats by
 
-
 	[HideInInspector] public EnemyObjectPool enemyObjectPool;
     [HideInInspector] public WaveManager waveManager;
     [HideInInspector] public ScalingManager scalingManager;
@@ -26,8 +25,8 @@ public class GameplayManager : MonoBehaviour
 
     public enum ELEMENTS
     {
-        FIRE = 0,
-        ICE,
+		ICE = 0,
+		FIRE,    
         LIGHTNING
     };
     
@@ -82,7 +81,11 @@ public class GameplayManager : MonoBehaviour
     {
 		if (Input.GetKeyDown(KeyCode.P))
         { 
-		    waveManager.spawnPoints[0].SpawnZombie(5, 1.0f, 0.0f);
+		    waveManager.spawnPoints[0].SpawnZombie(5, 1.0f, 0.0f, ELEMENTS.FIRE);
+		}
+		if (Input.GetKeyDown(KeyCode.O))
+		{
+			waveManager.spawnPoints[0].SpawnZombie(5, 1.0f, 0.0f, ELEMENTS.LIGHTNING);
 		}
 		if (Input.GetKeyDown(KeyCode.H))
 		{
@@ -97,6 +100,7 @@ public class GameplayManager : MonoBehaviour
         Destroy(temp);
     }
 
+    // Initialise all the systems required for enemies to spawn
     private void InitEnemySystem()
     {
         // Create different gameplayer element managers
@@ -125,4 +129,12 @@ public class GameplayManager : MonoBehaviour
         scalingManager.statMultiplier = statMultiplier;
         scalingManager.statAdditive = statAdditive;
     }
+
+    // Show the upgrade panel at the end of every wave
+    public void ShowUpgradePanel()
+    {
+
+    }
+
+
 }

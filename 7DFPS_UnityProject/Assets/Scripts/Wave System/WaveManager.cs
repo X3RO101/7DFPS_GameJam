@@ -17,6 +17,8 @@ public class WaveManager : MonoBehaviour
     private float spawnBounceTime = 5.0f;
     private ScalingManager sm;
 
+    public List<GameObject> aliveEnemies; // Keeps track of all alive enemies in the current wave
+
 	// Start is called before the first frame update
 	void Start()
     {
@@ -28,18 +30,24 @@ public class WaveManager : MonoBehaviour
 		spawnPoints = new List<SpawnPoint>();
         sm = GameManager.inst.gpManager.scalingManager;
         spawnBounceTime = sm.waveFrequency;
+        aliveEnemies = new List<GameObject>();
 
 	}
 
     // Update is called once per frame
     void Update()
     {
-		if (spawnBounceTime <= 0.0f)
-       {
-            
+	    if (spawnBounceTime <= 0.0f)
+        {
+
+            // Clear the previous list of alive enemies
+            aliveEnemies.Clear();
+            aliveEnemies.TrimExcess();
+
             UpdateSpawnDistances(false);
             float enemyCount = sm.enemyCount * sm.enemyCountMultiplier;
             float[] enemyStatModiers = { sm.statMultiplier, sm.statAdditive };
+            GameplayManager.ELEMENTS elementType = sm.GetElementTypeToSpawn();
 
             for (int i = 0; i < sm.groupSpawnCount; ++i)
             {
@@ -52,7 +60,7 @@ public class WaveManager : MonoBehaviour
                 switch(enemyType)
                 {
                     case GameplayManager.ENEMY_TYPE.ZOMBIE:
-                        temp.SpawnZombie((int)(sm.enemyCount * sm.enemyCountMultiplier), enemyStatModiers[0], enemyStatModiers[1]);
+                        temp.SpawnZombie((int)(sm.enemyCount * sm.enemyCountMultiplier), enemyStatModiers[0], enemyStatModiers[1], elementType);
                         break;
                     default:
                         break;
@@ -60,11 +68,11 @@ public class WaveManager : MonoBehaviour
 
             }
             spawnBounceTime = sm.waveFrequency;
-       }
-       else
-       {
+        }
+        else
+        {
             spawnBounceTime -= Time.deltaTime;
-       }
+        }
 
     }
 

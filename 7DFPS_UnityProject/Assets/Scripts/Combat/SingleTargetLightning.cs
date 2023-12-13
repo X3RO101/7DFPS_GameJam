@@ -20,7 +20,13 @@ public class SingleTargetLightning : MonoBehaviour
             Destroy(gameObject);
             GameObject impact = Instantiate(impactPrefab);
             impact.transform.position = transform.position;
-        }
+
+            // Enemy damage logic
+			EnemyObject temp = collision.gameObject.GetComponent<EnemyObject>();
+			temp.FlashWhite();
+			// Change damage value, placeholder value = 1
+			temp.hp.SetCurrentHealth(temp.hp.GetCurrentHealth() - 1);
+		}
         else if(collision.gameObject.layer == LayerMask.NameToLayer("Obstacle") ||
             collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {

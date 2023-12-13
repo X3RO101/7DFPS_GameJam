@@ -159,7 +159,14 @@ public class PlayerCombat : MonoBehaviour
                     if(Physics.Raycast(ray, out hit, 2000f, singleTargetLayerMask))
                     {
                         if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-                            SingleTargetFire(hit.collider.gameObject);
+                        {
+							SingleTargetFire(hit.collider.gameObject);
+							EnemyObject temp = hit.collider.gameObject.GetComponent<EnemyObject>();
+							temp.FlashWhite();
+							// Change damage value, placeholder value = 1
+							temp.hp.SetCurrentHealth(temp.hp.GetCurrentHealth() - 1);
+						}
+                            
                     }
                 }
                 break;

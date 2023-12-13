@@ -11,16 +11,21 @@ public class EnemyObject : MonoBehaviour
     private NavMeshAgent agent; // navmeshagent component
     public SkinnedMeshRenderer mr; // mesh renderer component, lets us hotswap materials at runtime (can be used to change material depending on element)
     private Animator animator; // animation controller
-    [HideInInspector] public HealthComponent hp; // health component to get/set hp related things
+    public HealthComponent hp; // health component to get/set hp related things
     public int damage; // damage to deal to the player when in contact
 
+    [Header ("Materials")]
     public Material normalMat;
     public Material damagedMat;
+    public Material normalFace;
+    public Material damagedFace;
+
+    [Header("Element Materials")]
+    public Material[] elementMaterialList;
 
     private enum EnemyAnimationState
     {
         WALK = 0,
-        DAMAGED,
     };
 
     // Start is called before the first frame update
@@ -50,16 +55,16 @@ public class EnemyObject : MonoBehaviour
 				break;
 		}
 
-        // Test code for flashing white on damage
-        if(bouncetime <= 0.0f)
-        {
-            FlashWhite();
-            bouncetime = 3.0f;
-        }
-        else
-        {
-            bouncetime -= Time.deltaTime;
-        }
+		if (bouncetime <= 0.0f)
+		{
+			FlashWhite();
+			//hp.SetCurrentHealth(hp.GetCurrentHealth() - 1);
+			bouncetime = 3.0f;
+		}
+		else
+		{
+			bouncetime -= Time.deltaTime;
+		}
 	}
 
     // Changes the animation state of the enemy to the one specified
@@ -70,12 +75,11 @@ public class EnemyObject : MonoBehaviour
             case EnemyAnimationState.WALK:
                 animator.SetTrigger("Walk");
                 break;
-            case EnemyAnimationState.DAMAGED:
-                animator.SetTrigger("Damaged"); 
-                break;
             default:
                 break;
         }
+
+        
     }
 
     public int GetDamage()
@@ -94,9 +98,11 @@ public class EnemyObject : MonoBehaviour
 
     IEnumerator FlashOnHit()
     {
-        mr.material = damagedMat;
-        yield return new WaitForSeconds(0.1f);
-        mr.material = normalMat;
-        yield break;
+        Material[] damaged = { damagedMat, damagedFace };
+        mr.materials = damaged;
+        yield return new WaitForSeconds(0.15f);
+		Material[] normal = { normalMat, normalFace };
+		mr.materials = normal;
+		yield break;
     }
 }

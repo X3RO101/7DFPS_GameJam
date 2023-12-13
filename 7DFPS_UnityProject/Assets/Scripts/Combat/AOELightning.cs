@@ -32,7 +32,11 @@ public class AOELightning : MonoBehaviour
         {
             //Attack enemies in here
             Debug.Log("Hit enemy");
-        }
+			EnemyObject temp = collision.gameObject.GetComponent<EnemyObject>();
+			temp.FlashWhite();
+			// Change damage value, placeholder value = 1
+			temp.hp.SetCurrentHealth(temp.hp.GetCurrentHealth() - 1);
+		}
     }
 
     private IEnumerator DestroyAOE()

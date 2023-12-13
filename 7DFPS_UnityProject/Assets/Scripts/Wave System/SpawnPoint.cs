@@ -20,7 +20,7 @@ public class SpawnPoint : MonoBehaviour
         
     }
 
-    public void SpawnZombie(int enemyCount, float statMultiplier, float statAdditive)
+    public void SpawnZombie(int enemyCount, float statMultiplier, float statAdditive, GameplayManager.ELEMENTS elementType)
     {
         GameObject temp = null;
         EnemyObject tempEnemyObj = null;
@@ -30,10 +30,19 @@ public class SpawnPoint : MonoBehaviour
 			tempEnemyObj = temp.GetComponent<EnemyObject>();
 			temp.transform.position = this.transform.position;
             // TO ADD ENEMY STATS CODE HERE, modify healthcomponent, element etc
-            tempEnemyObj.hp.SetMaxHealth((int)((tempEnemyObj.hp.GetCurrentHealth() * statMultiplier) + statAdditive));
+            // Enemy HP
+            tempEnemyObj.hp.SetMaxHealth((int)((tempEnemyObj.hp.GetMaxHealth() * statMultiplier) + statAdditive));
             tempEnemyObj.hp.SetCurrentHealth(tempEnemyObj.hp.GetMaxHealth());
+
+            // Enemy Element
+            tempEnemyObj.element = elementType;
+            tempEnemyObj.normalMat = tempEnemyObj.elementMaterialList[(int)elementType];
+            tempEnemyObj.mr.material = tempEnemyObj.normalMat;
             // Add damage code
             temp.SetActive(true);
+
+            // Add this enemy to a list to keep track of all alive enemies in the current wave
+            GameManager.inst.gpManager.waveManager.aliveEnemies.Add(temp);
         }
     }
     public void SpawnCharger(int enemyCount, float difficultyScale)

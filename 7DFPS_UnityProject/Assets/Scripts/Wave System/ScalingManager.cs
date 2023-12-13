@@ -64,6 +64,27 @@ public class ScalingManager : MonoBehaviour
         }
 	}
 
+    public GameplayManager.ELEMENTS GetElementTypeToSpawn()
+    {
+        float rand = Random.Range(0, 3);
+
+        // Choose a random element to spawn
+        if (rand < 1.0f)
+        {
+            return GameplayManager.ELEMENTS.ICE;
+        }
+        else if (rand < 2.0f)
+        {
+            return GameplayManager.ELEMENTS.FIRE;
+        }
+        else if (rand < 3.0f)
+        {
+            return GameplayManager.ELEMENTS.LIGHTNING;
+        }
+
+        return GameplayManager.ELEMENTS.FIRE;
+    }
+
     private void IncreaseDifficultyScale()
     {
         if (enemyCount < 10 && timeElapsed >= 15.0f)
