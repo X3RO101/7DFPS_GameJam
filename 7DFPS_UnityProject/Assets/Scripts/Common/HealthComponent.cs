@@ -6,6 +6,8 @@ public class HealthComponent : MonoBehaviour
 {
     public int maxHealth = 1;
     [HideInInspector] public int currentHealth;
+
+    [SerializeField] private GameObject deathPS;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,8 +19,6 @@ public class HealthComponent : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
-            // Play death animation / particle system / sfx
-
             // Coroutine so that the effects above can finishing playing before we disable this gameobject
             StartCoroutine(Kill());
         }
@@ -49,6 +49,20 @@ public class HealthComponent : MonoBehaviour
     {
         yield return new WaitForSeconds(0.3f);
         gameObject.SetActive(false);
+
+        //Init death particle system on slime pos
+        GameObject ps = Instantiate(deathPS);
+        ps.transform.position = new Vector3(transform.position.x, 0.25f, transform.position.z);
+
+        Color color = Color.red;
+        EnemyObject enemyInfo = GetComponent<EnemyObject>();
+        if (enemyInfo.element == GameplayManager.ELEMENTS.ICE)
+            color = Color.cyan;
+        else if (enemyInfo.element == GameplayManager.ELEMENTS.LIGHTNING)
+            color = new Color(101/255, 0, 255/255);
+
+        var colorModifier = ps.GetComponent<ParticleSystem>().main;
+        colorModifier.startColor = color;
 
         //Give exp to player
         GameManager.inst.gpManager.player.currExp += (int)(250 * GameManager.inst.gpManager.player.lv * 0.8f);

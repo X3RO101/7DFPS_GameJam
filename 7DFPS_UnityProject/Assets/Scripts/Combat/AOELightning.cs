@@ -40,7 +40,7 @@ public class AOELightning : MonoBehaviour
         {
             if (lightningStrikeTimer > lightningStrikeRate && stopTimer <= stopTime)
             {
-                Debug.Log("Do hit now!");
+                //Debug.Log("Do hit now!");
                 lightningStrikeTimer = 0.0f;
                
                 //Attack enemies in here
