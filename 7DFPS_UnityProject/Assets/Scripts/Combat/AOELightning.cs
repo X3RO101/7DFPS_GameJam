@@ -42,17 +42,31 @@ public class AOELightning : MonoBehaviour
             {
                 Debug.Log("Do hit now!");
                 lightningStrikeTimer = 0.0f;
-
-                //Calculate lightning damage
-                int lightningDamage = GameManager.inst.gpManager.player.combat.aoeLightningDamage;
-                int damage = lightningDamage + (int)Random.Range(-lightningDamage * 0.1f, lightningDamage * 0.1f);
-
-                DamageNumber damageUI = GameManager.inst.gpManager.hudInfo.SpawnDamageIndicator();
-                damageUI.InitDamageIndicator(damage, collision.gameObject.transform, Color.white);
-
+               
                 //Attack enemies in here
                 //Debug.Log("Hit enemy");
                 EnemyObject temp = collision.gameObject.GetComponent<EnemyObject>();
+                Color damageColor = Color.white;
+                //Check if element can crit or is resistant to it (Set damage number to be gray if resistant, white for normal, yellow for crit)
+                float damageMultiplier = 1.0f;
+                if (temp.element == GameplayManager.ELEMENTS.LIGHTNING)
+                {
+                    damageMultiplier = GameManager.inst.gpManager.player.combat.weakMultiplier;
+                    damageColor = Color.gray;
+                }
+                else if (temp.element == GameplayManager.ELEMENTS.ICE)
+                {
+                    damageMultiplier = GameManager.inst.gpManager.player.combat.critMultiplier;
+                    damageColor = Color.yellow;
+                }
+
+                //Calculate lightning damage
+                int lightningDamage = (int)(GameManager.inst.gpManager.player.combat.aoeLightningDamage * damageMultiplier);
+                int damage = lightningDamage + (int)Random.Range(-lightningDamage * 0.1f, lightningDamage * 0.1f);
+
+                DamageNumber damageUI = GameManager.inst.gpManager.hudInfo.SpawnDamageIndicator();
+                damageUI.InitDamageIndicator(damage, collision.gameObject.transform, damageColor);
+
                 temp.FlashWhite();
                 // Change damage value, placeholder value = 1
                 temp.hp.SetCurrentHealth(temp.hp.GetCurrentHealth() - damage);

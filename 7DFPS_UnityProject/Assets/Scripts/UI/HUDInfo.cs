@@ -11,8 +11,10 @@ public class HUDInfo : MonoBehaviour
 
     [Header("General Player UI")]
     [SerializeField] private Slider playerHPBar;
+    [SerializeField] private Slider playerEXPBar;
     [SerializeField] private TextMeshProUGUI playerHPText;
     [SerializeField] private TextMeshProUGUI playerLVText;
+    [SerializeField] private TextMeshProUGUI playerEXPText;
 
     [Header("Elemental UI")]
     [SerializeField] private Image iceCrosshair;
@@ -30,6 +32,17 @@ public class HUDInfo : MonoBehaviour
 
     [Header("Damage indicator")]
     [SerializeField] private GameObject damageIndicatorPrefab = null;
+
+    [Header("Other UI Info")]
+    [SerializeField] private CanvasGroup levelUpPromptContainer = null;
+
+    public bool isLevelUpPromptEnabled
+    {
+        get
+        {
+            return levelUpPromptContainer.gameObject.activeSelf;
+        }
+    }
 
     private void FixedUpdate()
     {
@@ -62,8 +75,13 @@ public class HUDInfo : MonoBehaviour
     }
     public void UpdateHP(int hp,int maxHP)
     {
-        playerHPBar.value = hp/ maxHP;
+        playerHPBar.value = hp / maxHP;
         playerHPText.text = hp.ToString() + "/" + maxHP.ToString();
+    }
+    public void UpdateEXP(int exp, int maxEXP)
+    {
+        playerEXPBar.value = exp / maxEXP;
+        playerEXPText.text = exp.ToString() + "/" + maxEXP.ToString();
     }
     public void UpdateLevel(int lv)
     {
@@ -122,6 +140,18 @@ public class HUDInfo : MonoBehaviour
 
         elementAOEContainers[(int)elementType].DOFade(targetAlpha, 0.1f);
         elementAOEContainers[(int)elementType].transform.DOLocalMoveY(pos.y, 0.25f);
+    }
+    public void PromptLevelUpText(bool enable)
+    {
+        if(enable)
+        {
+            levelUpPromptContainer.gameObject.SetActive(true);
+            levelUpPromptContainer.DOFade(1F, 0.25F);
+        }
+        else
+        {
+            levelUpPromptContainer.DOFade(0f, 0.25f).OnComplete(() => levelUpPromptContainer.gameObject.SetActive(false));
+        }
     }
     public DamageNumber SpawnDamageIndicator()
     {

@@ -49,5 +49,18 @@ public class HealthComponent : MonoBehaviour
     {
         yield return new WaitForSeconds(0.3f);
         gameObject.SetActive(false);
+
+        //Give exp to player
+        GameManager.inst.gpManager.player.currExp += (int)(250 * GameManager.inst.gpManager.player.lv * 0.8f);
+        GameManager.inst.gpManager.hudInfo.UpdateEXP(GameManager.inst.gpManager.player.currExp, GameManager.inst.gpManager.player.maxExp);
+
+        //Prompt level up text if needed
+        if(GameManager.inst.gpManager.player.isReadyToLevelUp)
+        {
+            if(!GameManager.inst.gpManager.hudInfo.isLevelUpPromptEnabled)
+            {
+                GameManager.inst.gpManager.hudInfo.PromptLevelUpText(true);
+            }
+        }
     }
 }

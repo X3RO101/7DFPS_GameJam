@@ -30,6 +30,10 @@ public class PlayerCombat : MonoBehaviour
     public int aoeFireDamage = 300;
     public int aoeLightningDamage = 100;            //Per lightning strike
 
+    [Header("Damage multipliers")]
+    public float weakMultiplier = 0.8f;
+    public float critMultiplier = 1.2f;
+
     [Space(10)]
     [SerializeField] private Transform lightningProjectileSpawnLocation = null;
     [SerializeField] private Transform iceProjectileSpawnLocation = null;
@@ -326,13 +330,26 @@ public class PlayerCombat : MonoBehaviour
         fireSword.source = gameObject;
         fireSword.PlayAnimation();
 
+        EnemyObject temp = enemy.gameObject.GetComponent<EnemyObject>();
+        Color damageColor = Color.white;
+        //Check if element can crit or is resistant to it (Set damage number to be gray if resistant, white for normal, yellow for crit)
+        float damageMultiplier = 1.0f;
+        if (temp.element == GameplayManager.ELEMENTS.FIRE)
+        {
+            damageMultiplier = weakMultiplier;
+            damageColor = Color.gray;
+        }
+        else if (temp.element == GameplayManager.ELEMENTS.LIGHTNING)
+        {
+            damageMultiplier = critMultiplier;
+            damageColor = Color.yellow;
+        }
+
         //Calculate fire damage
-        int damage = singleTargetFireDamage + (int)Random.Range(-singleTargetFireDamage * 0.1f, singleTargetFireDamage * 0.1f);
+        int damage = (int)(singleTargetFireDamage * damageMultiplier) + (int)Random.Range(-singleTargetFireDamage * 0.1f, singleTargetFireDamage * 0.1f);
 
         DamageNumber damageUI = GameManager.inst.gpManager.hudInfo.SpawnDamageIndicator();
-        damageUI.InitDamageIndicator(damage, enemy.transform, Color.white);
-
-        EnemyObject temp = enemy.gameObject.GetComponent<EnemyObject>();
+        damageUI.InitDamageIndicator(damage, enemy.transform, damageColor);
         temp.FlashWhite();
         // Change damage value, placeholder value = 1
         temp.hp.SetCurrentHealth(temp.hp.GetCurrentHealth() - damage);            

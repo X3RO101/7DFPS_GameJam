@@ -21,15 +21,30 @@ public class AOEIce : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             //Attack enemies in here
-            Debug.Log("Hit enemy");
+            //Debug.Log("Hit enemy");
+            EnemyObject temp = collision.gameObject.GetComponent<EnemyObject>();
+            Color damageColor = Color.white;
+            //Check if element can crit or is resistant to it (Set damage number to be gray if resistant, white for normal, yellow for crit)
+            float damageMultiplier = 1.0f;
+            if (temp.element == GameplayManager.ELEMENTS.ICE)
+            {
+                damageMultiplier = GameManager.inst.gpManager.player.combat.weakMultiplier;
+                damageColor = Color.gray;
+            }
+            else if (temp.element == GameplayManager.ELEMENTS.FIRE)
+            {
+                damageMultiplier = GameManager.inst.gpManager.player.combat.critMultiplier;
+                damageColor = Color.yellow;
+            }
+
             //Calculate ice damage
-            int iceDamage = GameManager.inst.gpManager.player.combat.aoeIceDamage;
+            int iceDamage = (int)(GameManager.inst.gpManager.player.combat.aoeIceDamage * damageMultiplier);
             int damage = iceDamage + (int)Random.Range(-iceDamage * 0.1f, iceDamage * 0.1f);
 
             DamageNumber damageUI = GameManager.inst.gpManager.hudInfo.SpawnDamageIndicator();
-            damageUI.InitDamageIndicator(damage, collision.gameObject.transform, Color.white);
+            damageUI.InitDamageIndicator(damage, collision.gameObject.transform, damageColor);
 
-            EnemyObject temp = collision.gameObject.GetComponent<EnemyObject>();
+
 			temp.FlashWhite();
 			// Change damage value, placeholder value = 1
 			temp.hp.SetCurrentHealth(temp.hp.GetCurrentHealth() - damage);        

@@ -21,15 +21,30 @@ public class SingleTargetLightning : MonoBehaviour
             GameObject impact = Instantiate(impactPrefab);
             impact.transform.position = transform.position;
 
+            // Enemy damage logic
+            EnemyObject temp = collision.gameObject.GetComponent<EnemyObject>();
+            Color damageColor = Color.white;
+            //Check if element can crit or is resistant to it (Set damage number to be gray if resistant, white for normal, yellow for crit)
+            float damageMultiplier = 1.0f;
+            if (temp.element == GameplayManager.ELEMENTS.LIGHTNING)
+            {
+                damageMultiplier = GameManager.inst.gpManager.player.combat.weakMultiplier;
+                damageColor = Color.gray;
+            }
+            else if (temp.element == GameplayManager.ELEMENTS.ICE)
+            {
+                damageMultiplier = GameManager.inst.gpManager.player.combat.critMultiplier;
+                damageColor = Color.yellow;
+            }
+
             //Calculate lightning damage
-            int lightningDamage = GameManager.inst.gpManager.player.combat.singleTargetLightningDamage;
+            int lightningDamage = (int)(GameManager.inst.gpManager.player.combat.singleTargetLightningDamage * damageMultiplier);
             int damage = lightningDamage + (int)Random.Range(-lightningDamage * 0.1f, lightningDamage * 0.1f);
 
             DamageNumber damageUI = GameManager.inst.gpManager.hudInfo.SpawnDamageIndicator();
-            damageUI.InitDamageIndicator(damage, collision.gameObject.transform, Color.white);
+            damageUI.InitDamageIndicator(damage, collision.gameObject.transform, damageColor);
 
-            // Enemy damage logic
-            EnemyObject temp = collision.gameObject.GetComponent<EnemyObject>();
+            //Set enemy to flash white
 			temp.FlashWhite();
 			// Change damage value, placeholder value = 1
 			temp.hp.SetCurrentHealth(temp.hp.GetCurrentHealth() - damage);            
