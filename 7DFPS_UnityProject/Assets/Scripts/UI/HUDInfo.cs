@@ -112,8 +112,8 @@ public class HUDInfo : MonoBehaviour
         DOTween.Kill(elementPanelBorders[(int)previousElementType]);
         DOTween.Kill(elementPanelBorders[(int)newElementType]);
 
-        elementPanelBorders[(int)previousElementType].DOColor(panelDefaultColor, 0.25f);
-        elementPanelBorders[(int)newElementType].DOColor(panelSelectedColor, 0.25f);
+        elementPanelBorders[(int)previousElementType].DOColor(panelDefaultColor, 0.25f).SetAutoKill(true);
+        elementPanelBorders[(int)newElementType].DOColor(panelSelectedColor, 0.25f).SetAutoKill(true);
     }
     public void SetCrosshairEnable(bool enable)
     {

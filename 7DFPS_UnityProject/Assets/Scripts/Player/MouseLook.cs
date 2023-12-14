@@ -17,27 +17,27 @@ public class MouseLook : MonoBehaviour
     {
         // Set target direction to the camera's initial orientation.
         targetDirection = transform.rotation.eulerAngles;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
 
     void LateUpdate()
     {
-        // pressing esc toggles between hide/show and lock/unlock cursor
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Cursor.visible = !Cursor.visible;
+        //// pressing esc toggles between hide/show and lock/unlock cursor
+        //if (Input.GetKeyDown(KeyCode.Escape))
+        //{
+        //    Cursor.visible = !Cursor.visible;
 
-            if (Cursor.visible)
-                Cursor.lockState = CursorLockMode.None;
-            else
-                Cursor.lockState = CursorLockMode.Locked;
-        }
+        //    if (Cursor.visible)
+        //        Cursor.lockState = CursorLockMode.None;
+        //    else
+        //        Cursor.lockState = CursorLockMode.Locked;
+        //}
 
-        if (Cursor.visible)
-        {
-            return;
-        }
+        //if (Cursor.visible)
+        //{
+        //    return;
+        //}
 
         // Allow the script to clamp based on a desired target value.
         Quaternion targetOrientation = Quaternion.Euler(targetDirection);

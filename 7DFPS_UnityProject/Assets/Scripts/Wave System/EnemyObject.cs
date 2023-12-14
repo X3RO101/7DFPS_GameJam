@@ -19,7 +19,7 @@ public class EnemyObject : MonoBehaviour
     [HideInInspector] public Material normalMat;
     [HideInInspector] public Material normalFace;
     [HideInInspector] public Material damagedFace;
-    [HideInInspector] public GameObject ps; // particle system for the enemy, will change depending on element
+    public GameObject ps; // particle system for the enemy, will change depending on element
 
 	[Header("Materials")]
 	public Material damagedMat;
