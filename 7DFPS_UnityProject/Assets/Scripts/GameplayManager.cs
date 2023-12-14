@@ -18,6 +18,7 @@ public class GameplayManager : MonoBehaviour
 	public float statMultiplier = 1.0f; // how much to multiply the stats by
 	public float statAdditive = 0.0f; // how much to add the stats by
 
+
 	[HideInInspector] public EnemyObjectPool enemyObjectPool;
     [HideInInspector] public WaveManager waveManager;
     [HideInInspector] public ScalingManager scalingManager;
@@ -79,11 +80,11 @@ public class GameplayManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Pause the game and open the upgrade panel
-		if (Input.GetKeyDown(KeyCode.P))
-        {
-            UpgradeManager.inst.OpenUpgradePanel();
-		}
+  //      // Pause the game and open the upgrade panel
+		//if (Input.GetKeyDown(KeyCode.P))
+  //      {
+  //          UpgradeManager.inst.OpenUpgradePanel();
+		//}
 	}
 
     IEnumerator DomainExpansion(ELEMENTS domain)

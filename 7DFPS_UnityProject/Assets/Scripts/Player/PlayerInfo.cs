@@ -11,6 +11,7 @@ public class PlayerInfo : MonoBehaviour
     public int hp;
     public int maxHP;
     public int lv = 1;
+    public int skillpoints = 0;
     public int currExp = 0;
     public int maxExp = 300;
 
@@ -37,10 +38,11 @@ public class PlayerInfo : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.R))
         {
-            if(isReadyToLevelUp)
+            if(skillpoints > 0)
             {
                 //Show upgrade
                 GameManager.inst.gpManager.hudInfo.PromptLevelUpText(false);
+                GameManager.inst.gpManager.hudInfo.upgradeManager.OpenUpgradePanel();
             }
         }
     }

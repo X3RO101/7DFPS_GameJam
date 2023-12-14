@@ -7,7 +7,7 @@ using DG.Tweening;
 
 public class UpgradeManager : MonoBehaviour
 {
-    public static UpgradeManager inst;
+    //public static UpgradeManager inst;
 
     [HideInInspector] public List<int> playerStatLevels; // Ice, Fire, Lightning, HP
     private int unusedLevels;
@@ -22,20 +22,20 @@ public class UpgradeManager : MonoBehaviour
     [Header("Level Pip Sprite")]
     public List<Sprite> levelPipSpriteList; // Ice Pip, Fire Pip, Lightning Pip, HP Pip, Empty Pip
 
-	private void Awake()
-	{
-		if (inst != null && inst != this)
-		{
-			Destroy(gameObject);
-			return;
-		}
-		else
-		{
-			inst = this;
-		}
+	//private void Awake()
+	//{
+	//	if (inst != null && inst != this)
+	//	{
+	//		Destroy(gameObject);
+	//		return;
+	//	}
+	//	else
+	//	{
+	//		inst = this;
+	//	}
 
-		DontDestroyOnLoad(gameObject);
-	}
+	//	DontDestroyOnLoad(gameObject);
+	//}
 
 	// Start is called before the first frame update
 	void Start()
@@ -47,7 +47,7 @@ public class UpgradeManager : MonoBehaviour
 		playerStatLevels.Add(0);
 
         // Initialise number of levels the player has
-        unusedLevels = 100;
+        unusedLevels = 0;
 
 	}
 
@@ -144,17 +144,33 @@ public class UpgradeManager : MonoBehaviour
         UpdateStats();
 
         // Close the upgrade panel
-        upgradePanel.transform.DOMoveY(-Screen.height / 2, 0.6f).SetUpdate(true).SetEase(Ease.InBack).SetAutoKill(true).OnComplete(()=> { upgradePanel.SetActive(false); });
 
-		// Resume
-		Time.timeScale = 1.0f;
+        upgradePanel.GetComponent<CanvasGroup>().DOFade(0f, 0.3f).SetAutoKill(true).OnComplete(() => { upgradePanel.SetActive(false); });
+        //upgradePanel.transform.DOMoveY(-Screen.height / 2, 0.6f).SetUpdate(true).SetEase(Ease.InBack).SetAutoKill(true).OnComplete(()=> { upgradePanel.SetActive(false); });
+
+        // Resume
+        Time.timeScale = 1.0f;
+        GameManager.inst.gpManager.player.mouseLook.enabled = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     // Pause the game, open the upgrade panel
     public void OpenUpgradePanel()
     {
         Time.timeScale = 0.0f;
+        //Set skillpoints here
+        SetUnusedLevels(GameManager.inst.gpManager.player.skillpoints);
+        unusedLevelsTMP.text = "Unspent Skill-Points: " + unusedLevels;
         upgradePanel.SetActive(true);
-        upgradePanel.transform.DOMoveY(Screen.height / 2, 0.6f).SetUpdate(true).SetEase(Ease.OutBack).SetAutoKill(true);
+
+        CanvasGroup cg = upgradePanel.GetComponent<CanvasGroup>();
+        cg.DOFade(1f, 0.3f).SetAutoKill(true).SetUpdate(true);
+
+        //Disable mouse looking
+        GameManager.inst.gpManager.player.mouseLook.enabled = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        //upgradePanel.transform.DOMoveY(Screen.height / 2, 0.6f).SetUpdate(true).SetEase(Ease.OutBack).SetAutoKill(true);
     }
 }

@@ -35,6 +35,7 @@ public class HUDInfo : MonoBehaviour
 
     [Header("Other UI Info")]
     [SerializeField] private CanvasGroup levelUpPromptContainer = null;
+    public UpgradeManager upgradeManager = null;
 
     public bool isLevelUpPromptEnabled
     {
