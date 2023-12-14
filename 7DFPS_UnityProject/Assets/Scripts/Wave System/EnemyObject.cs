@@ -36,7 +36,7 @@ public class EnemyObject : MonoBehaviour
         hp = GetComponent<HealthComponent>();
 	}
 
-    float bouncetime = 3.0f;
+    //float bouncetime = 3.0f;
 
     // Update is called once per frame
     void Update()
@@ -55,16 +55,16 @@ public class EnemyObject : MonoBehaviour
 				break;
 		}
 
-		if (bouncetime <= 0.0f)
-		{
-			FlashWhite();
-			//hp.SetCurrentHealth(hp.GetCurrentHealth() - 1);
-			bouncetime = 3.0f;
-		}
-		else
-		{
-			bouncetime -= Time.deltaTime;
-		}
+		//if (bouncetime <= 0.0f)
+		//{
+		//	FlashWhite();
+		//	//hp.SetCurrentHealth(hp.GetCurrentHealth() - 1);
+		//	bouncetime = 3.0f;
+		//}
+		//else
+		//{
+		//	bouncetime -= Time.deltaTime;
+		//}
 	}
 
     // Changes the animation state of the enemy to the one specified
