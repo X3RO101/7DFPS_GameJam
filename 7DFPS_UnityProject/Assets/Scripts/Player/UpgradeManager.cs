@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class UpgradeManager : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class UpgradeManager : MonoBehaviour
 
     [HideInInspector] public List<int> playerStatLevels; // Ice, Fire, Lightning, HP
     private int unusedLevels;
+
+    public GameObject upgradePanel; // Upgrade panel GameObject, we will doTween this to move it in and out
 
     public List<GameObject> emptyPipContainers; // Parent obj of all the empty pip icons
 
@@ -134,4 +137,24 @@ public class UpgradeManager : MonoBehaviour
 		IncreaseUnusedLevels();
 	}
 
+    // Apply stat changes, close the upgrade panel, resume the game
+    public void ConfirmButton()
+    {
+        // Apply stat changes
+        UpdateStats();
+
+        // Close the upgrade panel
+        upgradePanel.transform.DOMoveY(-Screen.height / 2, 0.6f).SetUpdate(true).SetEase(Ease.InBack).SetAutoKill(true).OnComplete(()=> { upgradePanel.SetActive(false); });
+
+		// Resume
+		Time.timeScale = 1.0f;
+    }
+
+    // Pause the game, open the upgrade panel
+    public void OpenUpgradePanel()
+    {
+        Time.timeScale = 0.0f;
+        upgradePanel.SetActive(true);
+        upgradePanel.transform.DOMoveY(Screen.height / 2, 0.6f).SetUpdate(true).SetEase(Ease.OutBack).SetAutoKill(true);
+    }
 }

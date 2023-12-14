@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -14,14 +15,20 @@ public class EnemyObject : MonoBehaviour
     public HealthComponent hp; // health component to get/set hp related things
     public int damage; // damage to deal to the player when in contact
 
-    [Header ("Materials")]
-    public Material normalMat;
-    public Material damagedMat;
-    public Material normalFace;
-    public Material damagedFace;
+    
+    [HideInInspector] public Material normalMat;
+    [HideInInspector] public Material normalFace;
+    [HideInInspector] public Material damagedFace;
+    [HideInInspector] public GameObject ps; // particle system for the enemy, will change depending on element
 
-    [Header("Element Materials")]
-    public Material[] elementMaterialList;
+	[Header("Materials")]
+	public Material damagedMat;
+	public Material[] elementMaterialList;
+    public Material[] normalFaceMaterialList;
+    public Material[] damagedFaceMaterialList;
+
+    [Header("Particle Effects")]
+    public GameObject[] elementParticleList;
 
     private enum EnemyAnimationState
     {
@@ -34,6 +41,11 @@ public class EnemyObject : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         hp = GetComponent<HealthComponent>();
+
+        for(int i = 0; i < elementParticleList.Count(); ++i)
+        {
+            elementParticleList[i].SetActive(false);
+        }
 	}
 
     //float bouncetime = 3.0f;
@@ -91,6 +103,17 @@ public class EnemyObject : MonoBehaviour
         damage = setthis;
     }
 
+    public void StopElementParticles()
+    {
+        ps = elementParticleList[(int)element];
+        ps.SetActive(false);
+    }
+    public void StartElementParticles()
+    {
+        ps = elementParticleList[(int)element];
+        ps.SetActive(true);
+    }
+
     public void FlashWhite()
     {
         StartCoroutine(FlashOnHit());
@@ -100,7 +123,7 @@ public class EnemyObject : MonoBehaviour
     {
         Material[] damaged = { damagedMat, damagedFace };
         mr.materials = damaged;
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.1f);
 		Material[] normal = { normalMat, normalFace };
 		mr.materials = normal;
 		yield break;
