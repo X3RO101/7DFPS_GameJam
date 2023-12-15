@@ -79,19 +79,34 @@ public class UpgradeManager : MonoBehaviour
     // Function applies all the relevant stat changes for whatever the player did in the upgrade panel
     public void UpdateStats()
     {
-        for(int i = 0; i < playerStatLevels.Count; ++i)
+        PlayerCombat playerCombat = GameManager.inst.gpManager.player.combat;
+        for (int i = 0; i < playerStatLevels.Count; ++i)
         {
             // Modify the attacks/stats here in the respective switch case below
             // To get the current level for that particular stat -> playerStatLevels[i]
             switch(i)
             {
                 case 0: // ICE
+                    playerCombat.singleTargetIceDamage += (int)(playerCombat.singleTargetIceDamage * 0.15f);
+                    playerCombat.aoeIceDamage += (int)(playerCombat.aoeIceDamage * 0.15f);
+                    playerCombat.singleTargetIceCost = (int)(playerCombat.singleTargetIceCost * 0.5f);
+                    playerCombat.aoeIceCost = (int)(playerCombat.aoeIceCost * 0.5f);
                     break;
                 case 1: // FIRE
+                    playerCombat.singleTargetFireDamage += (int)(playerCombat.singleTargetFireDamage * 0.5f);
+                    playerCombat.aoeFireDamage += (int)(playerCombat.aoeFireDamage * 0.5f);
+                    playerCombat.aoeFireCost = (int)(playerCombat.aoeFireCost * 0.5f);
+                    playerCombat.aoeFireCooldown = (int)(playerCombat.aoeFireCooldown * 0.75f);
                     break;
                 case 2: // LIGHTNING
+                    playerCombat.singleTargetLightningDamage += (int)(playerCombat.singleTargetLightningDamage * 0.25F);
+                    playerCombat.aoeLightningDamage += (int)(playerCombat.aoeLightningDamage * 0.25F);
+                    playerCombat.singleTargetLightningCost = (int)(playerCombat.singleTargetLightningCost * 0.75f);
+                    playerCombat.aoeLightningCost = (int)(playerCombat.aoeLightningCost * 0.75f);
                     break;
                 case 3: // HP
+                    GameManager.inst.gpManager.player.maxHP = (int)(GameManager.inst.gpManager.player.maxHP * 1.5f);
+                    GameManager.inst.gpManager.player.hp = GameManager.inst.gpManager.player.maxHP;
                     break;
                 default:
                     break;

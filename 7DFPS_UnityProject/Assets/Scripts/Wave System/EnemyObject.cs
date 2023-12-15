@@ -90,8 +90,6 @@ public class EnemyObject : MonoBehaviour
             default:
                 break;
         }
-
-        
     }
 
     public int GetDamage()

@@ -39,7 +39,6 @@ public class WaveManager : MonoBehaviour
     {
 	    if (spawnBounceTime <= 0.0f)
         {
-
             // Clear the previous list of alive enemies
             aliveEnemies.Clear();
             aliveEnemies.TrimExcess();

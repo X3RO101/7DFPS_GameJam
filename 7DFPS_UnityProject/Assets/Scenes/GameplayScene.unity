@@ -11692,7 +11692,10 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'INCREASES DAMAGE (1.5X)
 
-    DECREASE AOE COOLDOWN'
+    lowers aoe cost by 50%
+
+    DECREASE AOE
+    COOLDOWN by 25%'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7c2b89dcaacc4f54cb78321564bd8679, type: 2}
   m_sharedMaterial: {fileID: -5016107910796237034, guid: 7c2b89dcaacc4f54cb78321564bd8679,
@@ -14837,7 +14840,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'RESTORES HEALTH
 
-    INCREASES MAX HP'
+    INCREASES MAX HP BY 50%'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7c2b89dcaacc4f54cb78321564bd8679, type: 2}
   m_sharedMaterial: {fileID: -5016107910796237034, guid: 7c2b89dcaacc4f54cb78321564bd8679,
@@ -16273,12 +16276,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'INCREASES PROJECTILE SPEED
+  m_text: 'INCREASES DAMAGE (1.25X)
 
-    INCREASES DAMAGE (1.25X)
-
-    LOWERS COST
-    BY 25%'
+    LOWERS COST BY 25%'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7c2b89dcaacc4f54cb78321564bd8679, type: 2}
   m_sharedMaterial: {fileID: -5016107910796237034, guid: 7c2b89dcaacc4f54cb78321564bd8679,
@@ -24739,13 +24739,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInfo: {fileID: 518897866}
-  amplitude: 0.0005
-  frequency: 17.5
+  amplitude: 0.00001
+  frequency: 14
   cam: {fileID: 1540067327}
   camHolder: {fileID: 518897863}
   controller: {fileID: 518897864}
   leanPivot: {fileID: 330585546}
-  leanAngle: 2
+  leanAngle: 1
   leanSmoothing: 0.005
 --- !u!1 &1543016307
 GameObject:

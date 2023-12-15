@@ -56,6 +56,9 @@ public class HealthComponent : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         gameObject.SetActive(false);
 
+        //Increase kill count for stats
+        GameManager.inst.gpManager.kills += 1;
+
         //Init death particle system on slime pos
         GameObject ps = Instantiate(deathPS);
         ps.transform.position = new Vector3(transform.position.x, 0.25f, transform.position.z);

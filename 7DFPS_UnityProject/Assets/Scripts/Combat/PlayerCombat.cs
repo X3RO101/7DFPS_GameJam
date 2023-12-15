@@ -39,15 +39,15 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private Transform iceProjectileSpawnLocation = null;
     
     [Header("Single target abilities")]
-    [SerializeField] private float singleTargetFireCooldown = 0.25f;
-    [SerializeField] private float singleTargetLightningCooldown = 1f;
-    [SerializeField] private float singleTargetIceCooldown = 0.5f;
+    public float singleTargetFireCooldown = 0.25f;
+    public float singleTargetLightningCooldown = 1f;
+    public float singleTargetIceCooldown = 0.5f;
     [SerializeField] private LayerMask singleTargetLayerMask;
 
     [Header("AOE abilities")]
-    [SerializeField] private float aoeFireCooldown = 0.5f;
-    [SerializeField] private float aoeLightningCooldown = 0.5f;
-    [SerializeField] private float aoeIceCooldown = 0.5f;
+    public float aoeFireCooldown = 0.5f;
+    public float aoeLightningCooldown = 0.5f;
+    public float aoeIceCooldown = 0.5f;
 
     [SerializeField] private GameObject aoeIndicator = null;
     [SerializeField] private LayerMask aoeIndicatorLayerMask;

@@ -13,6 +13,8 @@ public class GameplayManager : MonoBehaviour
 	public List<GameObject> enemyPrefabList;
     public List<GameObject> spawnPointList;
 
+    public int kills = 0;
+
     // Scaling Settings
     public float waveFrequency = 10.0f; // How long to wait before spawning the next wave
 	public float statMultiplier = 1.0f; // how much to multiply the stats by
@@ -69,6 +71,15 @@ public class GameplayManager : MonoBehaviour
 
             return ray;
         }
+    }
+
+
+    private void Awake()
+    {
+        if(GameManager.inst != null)
+            GameManager.inst.gpManager = this;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Start is called before the first frame update
