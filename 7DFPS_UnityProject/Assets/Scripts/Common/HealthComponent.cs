@@ -24,6 +24,8 @@ public class HealthComponent : MonoBehaviour
             if (tempEnemyObj != null)
             {
                 tempEnemyObj.StopElementParticles();
+                GameManager.inst.gpManager.player.combat.SetEnemiesKilled(GameManager.inst.gpManager.player.combat.GetEnemiesKilled() + 1);
+                GameManager.inst.gpManager.player.combat.UpdateDomainChargeValue();
             }
             // Coroutine so that the effects above can finishing playing before we disable this gameobject
             StartCoroutine(Kill());

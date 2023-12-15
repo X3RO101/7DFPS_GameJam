@@ -8932,6 +8932,7 @@ MonoBehaviour:
     type: 3}
   aoeIcePrefab: {fileID: 1174175851650715046, guid: 7c9f1073f79f40c48ac118dea4cec9d4,
     type: 3}
+  enemiesRequired: 100
 --- !u!1 &526219659
 GameObject:
   m_ObjectHideFlags: 0
@@ -30136,10 +30137,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crosshairGO: {fileID: 2004109754}
   playerHPBar: {fileID: 1264932604}
-  playerEXPBar: {fileID: 88293656}
+  playerEXPBar: {fileID: 0}
   playerHPText: {fileID: 1983892826}
   playerLVText: {fileID: 1811003634}
-  playerEXPText: {fileID: 1371310243}
+  playerEXPText: {fileID: 0}
   iceCrosshair: {fileID: 645287846}
   fireCrosshair: {fileID: 1699198690}
   lightningCrosshair: {fileID: 1604823838}
@@ -30160,7 +30161,7 @@ MonoBehaviour:
   damageIndicatorCritColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   damageIndicatorPrefab: {fileID: 904790302921228170, guid: 1ace1fff74c2cae43b8f68e480c51f72,
     type: 3}
-  levelUpPromptContainer: {fileID: 1258944508}
+  levelUpPromptContainer: {fileID: 0}
 --- !u!114 &1822801943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36185,7 +36186,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hudInfo: {fileID: 1822801942}
   player: {fileID: 518897866}
-  domainList: []
+  domainList:
+  - {fileID: 2716225878988619185, guid: 6825da265c03914448f87b3212e75029, type: 3}
+  - {fileID: 4214548771066180271, guid: d6ee9dbb1ab85bd4abcd170669ba7354, type: 3}
+  - {fileID: 6504916763023303800, guid: 178a4e8d2ed8d7d45a4a018cd18ccb42, type: 3}
   poolSize: 100
   enemyPrefabList:
   - {fileID: 2750582282920720913, guid: 4a0f8c40d47f2cd4586948542118b97a, type: 3}

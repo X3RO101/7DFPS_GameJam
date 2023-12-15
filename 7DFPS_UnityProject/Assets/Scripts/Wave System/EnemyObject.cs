@@ -11,7 +11,7 @@ public class EnemyObject : MonoBehaviour
 
     private NavMeshAgent agent; // navmeshagent component
     public SkinnedMeshRenderer mr; // mesh renderer component, lets us hotswap materials at runtime (can be used to change material depending on element)
-    private Animator animator; // animation controller
+    public Animator animator; // animation controller
     public HealthComponent hp; // health component to get/set hp related things
     public int damage; // damage to deal to the player when in contact
 
@@ -19,16 +19,13 @@ public class EnemyObject : MonoBehaviour
     [HideInInspector] public Material normalMat;
     [HideInInspector] public Material normalFace;
     [HideInInspector] public Material damagedFace;
-    public GameObject ps; // particle system for the enemy, will change depending on element
+    public GameObject psList; // list of particle system for the enemy, will change depending on element
 
 	[Header("Materials")]
 	public Material damagedMat;
 	public Material[] elementMaterialList;
     public Material[] normalFaceMaterialList;
     public Material[] damagedFaceMaterialList;
-
-    [Header("Particle Effects")]
-    public GameObject[] elementParticleList;
 
     private enum EnemyAnimationState
     {
@@ -41,11 +38,6 @@ public class EnemyObject : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         hp = GetComponent<HealthComponent>();
-
-        for(int i = 0; i < elementParticleList.Count(); ++i)
-        {
-            elementParticleList[i].SetActive(false);
-        }
 	}
 
     //float bouncetime = 3.0f;
@@ -105,13 +97,11 @@ public class EnemyObject : MonoBehaviour
 
     public void StopElementParticles()
     {
-        ps = elementParticleList[(int)element];
-        ps.SetActive(false);
+        psList.transform.GetChild((int)element).gameObject.SetActive(false);
     }
     public void StartElementParticles()
     {
-        ps = elementParticleList[(int)element];
-        ps.SetActive(true);
+        psList.transform.GetChild((int)element).gameObject.SetActive(true);
     }
 
     public void FlashWhite()

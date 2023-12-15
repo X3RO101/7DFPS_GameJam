@@ -44,8 +44,10 @@ public class SpawnPoint : MonoBehaviour
             tempEnemyObj.mr.materials = tempMats;
 
             // Particle system
-            tempEnemyObj.ps = tempEnemyObj.elementParticleList[(int)elementType];
             tempEnemyObj.StartElementParticles();
+
+            // Reset Animator
+            tempEnemyObj.animator.Rebind();
 
             // Add damage code below
             tempEnemyObj.SetDamage(1);
