@@ -67,6 +67,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private float enemiesRequired = 100; // How many enemies need to be killed before the player can use Domain Expansion
     private float domainCharge = 0.0f; // Percentage value, used to render the ult charge on the ui
     private float enemiesKilled = 0; // Number of enemies killed
+    private bool isDomainActive = false;
 
     private void Start()
     {
@@ -392,5 +393,13 @@ public class PlayerCombat : MonoBehaviour
     {
         return domainCharge;
     }
-
+    
+    public bool GetDomainActiveStatus()
+    {
+        return isDomainActive;
+    }
+    public void SetDomainActiveStatus(bool setthis)
+    {
+        isDomainActive = setthis;
+    }
 }

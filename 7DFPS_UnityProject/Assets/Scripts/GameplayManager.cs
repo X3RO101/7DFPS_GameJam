@@ -90,13 +90,15 @@ public class GameplayManager : MonoBehaviour
 
     public void DomainExpansion()
     {
-		StartCoroutine(SpawnDomainExpansion(GameManager.inst.gpManager.player.GetComponent<PlayerCombat>().equippedElement));
+		player.combat.SetDomainActiveStatus(true);
+		StartCoroutine(SpawnDomainExpansion(GameManager.inst.gpManager.player.GetComponent<PlayerCombat>().equippedElement));   
 	}
 
     IEnumerator SpawnDomainExpansion(ELEMENTS domain)
     {
         GameObject temp = Instantiate(domainList[(int)domain], position: player.gameObject.transform.position, Quaternion.identity);
         yield return new WaitForSeconds(12.0f);
+        player.combat.SetDomainActiveStatus(false);
         Destroy(temp);
     }
 
