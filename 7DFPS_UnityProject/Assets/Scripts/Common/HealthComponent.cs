@@ -80,6 +80,7 @@ public class HealthComponent : MonoBehaviour
         //Check if player can level up, if he can, level up player and prompt level up text
         if (GameManager.inst.gpManager.player.isReadyToLevelUp)
         {
+           
             GameManager.inst.gpManager.player.lv += 1;
             GameManager.inst.gpManager.player.currExp -= GameManager.inst.gpManager.player.maxExp;
             GameManager.inst.gpManager.player.maxExp = (int)(GameManager.inst.gpManager.player.maxExp * 1.2f);
@@ -90,8 +91,11 @@ public class HealthComponent : MonoBehaviour
 
 			if (GameManager.inst.gpManager.player.lv % 3 == 0)
             {
-                // Increase stats of enemy to scale with player (multiplier)
-                GameManager.inst.gpManager.scalingManager.statMultiplier += 0.2f;
+				// Play level up SFX (when player receives skill point)
+				AudioManager.inst.Play("lvlup");
+
+				// Increase stats of enemy to scale with player (multiplier)
+				GameManager.inst.gpManager.scalingManager.statMultiplier += 0.2f;
 
                 // Increase damage of enemy
                 GameManager.inst.gpManager.scalingManager.enemyDamage = (int)(GameManager.inst.gpManager.scalingManager.enemyDamage * 1.5f);
