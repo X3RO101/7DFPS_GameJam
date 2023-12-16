@@ -60,6 +60,17 @@ public class AudioManager : MonoBehaviour
         s.source.Play();
     }
 
+    public void PlayOneShot(string name)
+    {
+		Sound s = System.Array.Find(sounds, Sound => Sound.name == name);
+		if (s == null)
+		{
+			Debug.Log("Unable to find sound to play!");
+			return;
+		}
+
+		s.source.PlayOneShot(s.source.clip);
+	}
     public void StopAllSounds()
     {
         foreach (Sound s in sounds)

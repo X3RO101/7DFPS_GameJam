@@ -12123,37 +12123,16 @@ MonoBehaviour:
   sounds:
   - name: mainmenubgm
     clip: {fileID: 8300000, guid: 91d1ededd8e2abb4f94b327e2c29a893, type: 3}
-    volume: 1
+    volume: 0.5
     pitch: 1
     loop: 1
     source: {fileID: 0}
     mixer: {fileID: 0}
   - name: gameplaybgm
     clip: {fileID: 8300000, guid: 39f17aa0b61d651438b6a6ddd6162715, type: 3}
-    volume: 0.65
+    volume: 0.05
     pitch: 1
     loop: 1
-    source: {fileID: 0}
-    mixer: {fileID: 0}
-  - name: icesinglespawn
-    clip: {fileID: 8300000, guid: 1d29b344b96dab84ebc2ef22ee8b04ad, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-    mixer: {fileID: 0}
-  - name: icesingletravel
-    clip: {fileID: 8300000, guid: c8a269afc690ad045b85dd34c6e4a894, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-    mixer: {fileID: 0}
-  - name: icesingleimpact
-    clip: {fileID: 8300000, guid: b602a2cbd4d567646ab7100fe3110aef, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
     source: {fileID: 0}
     mixer: {fileID: 0}
   - name: mmbtnhover
@@ -12180,6 +12159,83 @@ MonoBehaviour:
   - name: lvlup
     clip: {fileID: 8300000, guid: bdccf5b0cce671f4e8d559648ae05289, type: 3}
     volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    mixer: {fileID: 0}
+  - name: playerdamaged
+    clip: {fileID: 8300000, guid: b47bfb5d9df923c41a50b80bc8f6be34, type: 3}
+    volume: 0.45
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    mixer: {fileID: 0}
+  - name: fireaoe
+    clip: {fileID: 8300000, guid: d1193d3ecce463948a5ec9cb061589d8, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    mixer: {fileID: 0}
+  - name: firesingle
+    clip: {fileID: 8300000, guid: 3869f223bdff7574899e469dffe49bfb, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    mixer: {fileID: 0}
+  - name: iceaoe
+    clip: {fileID: 8300000, guid: e8305c1b169ac234898de440c3b5ab3b, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    mixer: {fileID: 0}
+  - name: icedomain
+    clip: {fileID: 8300000, guid: af8b96d9d400e124ca298889b7e51b76, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    mixer: {fileID: 0}
+  - name: firedomain
+    clip: {fileID: 8300000, guid: c0698ec4785e1c94eb578bab8b631f09, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    mixer: {fileID: 0}
+  - name: lightningdomain
+    clip: {fileID: 8300000, guid: 31583a32f1fd29c448c93a9780845d48, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    mixer: {fileID: 0}
+  - name: lightningsingle
+    clip: {fileID: 8300000, guid: 37a71f1552bb5dd4097fc7b7b994351f, type: 3}
+    volume: 0.45
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    mixer: {fileID: 0}
+  - name: lightningaoe
+    clip: {fileID: 8300000, guid: 61a3c8b5a6167284b8d148b0861da7b1, type: 3}
+    volume: 0.15
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    mixer: {fileID: 0}
+  - name: icesinglespawn
+    clip: {fileID: 8300000, guid: 1d29b344b96dab84ebc2ef22ee8b04ad, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    mixer: {fileID: 0}
+  - name: icesingleimpact
+    clip: {fileID: 8300000, guid: b602a2cbd4d567646ab7100fe3110aef, type: 3}
+    volume: 0.3
     pitch: 1
     loop: 0
     source: {fileID: 0}

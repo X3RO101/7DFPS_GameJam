@@ -15,7 +15,8 @@ public class SingleTargetIce : MonoBehaviour
     private void Start()
     {
         StartCoroutine("DestroyProjectile");
-    }
+		AudioManager.inst.Play("icesinglespawn");
+	}
 
     private void Update()
     {
@@ -29,7 +30,7 @@ public class SingleTargetIce : MonoBehaviour
             GameObject arrow = arrowsRB[arrowIndex].gameObject;
             arrow.SetActive(true);
 
-            AudioManager.inst.Play("icesinglespawn");
+            
 
             Vector3 rotation = arrow.transform.rotation.eulerAngles;
             arrow.transform.rotation = Quaternion.Euler(rotation.x, transform.eulerAngles.y, rotation.z);
@@ -40,13 +41,11 @@ public class SingleTargetIce : MonoBehaviour
             if(arrowIndex + 1 > arrowsRB.Count)
             {
                 transform.parent = null;
-
+                
                 for(int i = 0; i < arrowsRB.Count; i++)
                 {
                     arrowsRB[i].AddForce(GameManager.inst.gpManager.crosshairToRay.direction * projectileSpeed, ForceMode.Impulse);
                     arrowsRB[i].GetComponent<BoxCollider>().enabled = true;
-
-                    AudioManager.inst.Play("icesingletravel");
                 }
             }
         }

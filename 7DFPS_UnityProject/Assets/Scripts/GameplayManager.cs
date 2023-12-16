@@ -127,6 +127,20 @@ public class GameplayManager : MonoBehaviour
     {
         Vector3 pos = new Vector3(player.gameObject.transform.position.x, 0, player.gameObject.transform.position.z);
         GameObject temp = Instantiate(domainList[(int)domain], position: pos, Quaternion.identity);
+
+        switch((int)domain)
+        {
+            case 0:
+                AudioManager.inst.Play("icedomain");
+                break;
+            case 1:
+				AudioManager.inst.Play("firedomain");
+				break;
+            case 2:
+				AudioManager.inst.Play("lightningdomain");
+				break;
+        }
+
         yield return new WaitForSeconds(12.0f);
         player.combat.SetDomainActiveStatus(false);
 
@@ -198,5 +212,17 @@ public class GameplayManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    public IEnumerator PlayLightningAOEAudio()
+    {
+		yield return new WaitForSeconds(0.23f);
+		for (int i = 0; i < 19; ++i)
+        {
+			AudioManager.inst.PlayOneShot("lightningaoe");
+            yield return new WaitForSeconds(0.23f);
+		}
+		AudioManager.inst.PlayOneShot("lightningaoe");
+		yield break;   
     }
 }

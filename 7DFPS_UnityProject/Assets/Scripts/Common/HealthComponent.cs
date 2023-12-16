@@ -91,8 +91,6 @@ public class HealthComponent : MonoBehaviour
 
 			if (GameManager.inst.gpManager.player.lv % 3 == 0)
             {
-				// Play level up SFX (when player receives skill point)
-				AudioManager.inst.Play("lvlup");
 
 				// Increase stats of enemy to scale with player (multiplier)
 				GameManager.inst.gpManager.scalingManager.statMultiplier += 0.2f;
