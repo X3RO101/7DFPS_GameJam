@@ -193,7 +193,7 @@ public class PlayerCombat : MonoBehaviour
             case GameplayManager.ELEMENTS.ICE:
                 if (Input.GetMouseButtonDown(0))
                 {
-                    if(isDomainActive)
+                    if(!isDomainActive)
                     {
                         iceAmmo -= aoeIceCost;
                         abilityCastTimer = 0.0f;

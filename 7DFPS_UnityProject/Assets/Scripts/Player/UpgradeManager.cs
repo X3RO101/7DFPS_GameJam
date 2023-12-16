@@ -151,10 +151,10 @@ public class UpgradeManager : MonoBehaviour
                 playerCombat.aoeIceCost = (int)(playerCombat.aoeIceCost * 0.5f);
                 playerCombat.iceAmmo = playerCombat.maxIceAmmo;
 
-                if (playerCombat.singleTargetIceCost < 1)
+                if (playerCombat.singleTargetIceCost <= 1)
                     playerCombat.singleTargetIceCost = 1;
 
-                if (playerCombat.aoeIceCost < 5)
+                if (playerCombat.aoeIceCost <= 5)
                     playerCombat.aoeIceCost = 5;
                 break;
             case 1: // FIRE
@@ -164,7 +164,7 @@ public class UpgradeManager : MonoBehaviour
                 playerCombat.aoeFireCooldown = (int)(playerCombat.aoeFireCooldown * 0.75f);
                 playerCombat.fireAmmo = playerCombat.maxFireAmmo;
 
-                if (playerCombat.aoeFireCost < 5)
+                if (playerCombat.aoeFireCost <= 5)
                     playerCombat.aoeFireCost = 5;
                 break;
             case 2: // LIGHTNING
@@ -174,10 +174,10 @@ public class UpgradeManager : MonoBehaviour
                 playerCombat.aoeLightningCost = (int)(playerCombat.aoeLightningCost * 0.75f);
                 playerCombat.lightningAmmo = playerCombat.maxLightningAmmo;
                 
-                if (playerCombat.singleTargetLightningCost < 1)
+                if (playerCombat.singleTargetLightningCost <= 1)
                     playerCombat.singleTargetLightningCost = 1;
 
-                if (playerCombat.aoeLightningCost < 5)
+                if (playerCombat.aoeLightningCost <= 5)
                     playerCombat.aoeLightningCost = 5;
                 break;
             case 3: // HP

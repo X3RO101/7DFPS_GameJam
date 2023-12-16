@@ -5113,6 +5113,7 @@ MonoBehaviour:
   camSway: {fileID: 1540067328}
   mouseLook: {fileID: 518897867}
   died: 0
+  inUpgradeManager: 0
   hp: 100
   maxHP: 100
   lv: 1
