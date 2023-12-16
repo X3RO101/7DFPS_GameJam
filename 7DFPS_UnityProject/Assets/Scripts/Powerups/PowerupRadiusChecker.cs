@@ -8,6 +8,6 @@ public class PowerupRadiusChecker : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        other.GetComponent<Powerup>().target = GameManager.inst.gpManager.player.gameObject;
+        //other.GetComponent<Powerup>().target = GameManager.inst.gpManager.player.gameObject;
     }
 }

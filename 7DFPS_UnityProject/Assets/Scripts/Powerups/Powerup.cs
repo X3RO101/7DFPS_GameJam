@@ -5,18 +5,18 @@ using UnityEngine;
 public class Powerup : MonoBehaviour
 {
     public GameplayManager.ELEMENTS elementType;
-    public GameObject target = null;
+    //public GameObject target = null;
 
-    [SerializeField]
-    private Rigidbody rb;
+    //[SerializeField]
+    //private Rigidbody rb;
 
     private void LateUpdate()
     {
-        if (target == null)
-            return;
+        //if (target == null)
+        //    return;
 
-        Vector3 velocity = (target.transform.position - transform.position) * 5F;
-        rb.velocity = velocity;
+        //Vector3 velocity = (target.transform.position - transform.position) * 5F;
+        //rb.velocity = velocity;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -51,6 +51,7 @@ public class Powerup : MonoBehaviour
                 break;
         }
 
-        Destroy(gameObject);
+        GameManager.inst.gpManager.ClearPowerUps();
+        //Destroy(gameObject);
     }
 }
