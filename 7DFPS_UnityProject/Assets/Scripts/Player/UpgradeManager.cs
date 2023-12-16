@@ -242,4 +242,9 @@ public class UpgradeManager : MonoBehaviour
         Cursor.visible = true;
         //upgradePanel.transform.DOMoveY(Screen.height / 2, 0.6f).SetUpdate(true).SetEase(Ease.OutBack).SetAutoKill(true);
     }
+
+    public void AudioOnButtonClick()
+    {
+        AudioManager.inst.Play("gpbtnclick");
+    }
 }

@@ -58,6 +58,8 @@ public class IceArrow : MonoBehaviour
             temp.StopAgentMovement(0.2f);
             temp.StopAnimation(0.2f);
             GameManager.inst.gpManager.totalDamage += damage;
+
+            AudioManager.inst.Play("icesingleimpact");
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Obstacle") ||
             collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
@@ -65,6 +67,8 @@ public class IceArrow : MonoBehaviour
             Destroy(gameObject);
             GameObject impact = Instantiate(impactPrefab);
             impact.transform.position = transform.position;
-        }
+
+			AudioManager.inst.Play("icesingleimpact");
+		}
     }
 }

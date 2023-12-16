@@ -6,6 +6,7 @@ using UnityEngine.Audio;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager inst;
+    public AudioMixerGroup mixer;
 
     [Header("Sound List")]
     public Sound[] sounds;
@@ -28,7 +29,10 @@ public class AudioManager : MonoBehaviour
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
+            s.source.outputAudioMixerGroup = mixer;
         }
+
+		DontDestroyOnLoad(gameObject);
 	}
 
 	// Start is called before the first frame update
@@ -54,5 +58,13 @@ public class AudioManager : MonoBehaviour
         }
 
         s.source.Play();
+    }
+
+    public void StopAllSounds()
+    {
+        foreach (Sound s in sounds)
+        {
+            s.source.Stop();
+        }
     }
 }

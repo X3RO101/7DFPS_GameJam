@@ -13,7 +13,9 @@ public class MainMenuManager : MonoBehaviour
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-    }
+
+		AudioManager.inst.Play("mainmenubgm");
+	}
 
     private void LateUpdate()
     {
@@ -30,6 +32,8 @@ public class MainMenuManager : MonoBehaviour
     public void PlayGame()
     {
         SceneManager.LoadScene("GameplayScene");
+        AudioManager.inst.StopAllSounds();
+        AudioManager.inst.Play("gameplaybgm");
     }
 
     public void LoadTutorial()
@@ -49,5 +53,14 @@ public class MainMenuManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void OnButtonHover()
+    {
+        AudioManager.inst.Play("mmbtnhover");
+    }
+    public void OnButtonClick()
+    {
+        AudioManager.inst.Play("mmbtnclick");
     }
 }
