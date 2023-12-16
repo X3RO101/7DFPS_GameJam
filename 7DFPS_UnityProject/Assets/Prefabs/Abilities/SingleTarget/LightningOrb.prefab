@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5438057195843359603}
   - component: {fileID: 5438057195843359600}
   - component: {fileID: 5438057195843359601}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 2929271048229363028}
   - component: {fileID: 4669092755660605637}
   - component: {fileID: 4610925563802729117}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LightningOrb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ Transform:
   - {fileID: 5438057197157348840}
   - {fileID: 5438057196521209461}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &2929271048229363028
 SphereCollider:
@@ -195,7 +195,7 @@ GameObject:
   - component: {fileID: 5438057196521209461}
   - component: {fileID: 5438057196521209462}
   - component: {fileID: 5438057196521209463}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SparksElectric_03_Example
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5035,7 +5035,7 @@ GameObject:
   - component: {fileID: 5438057197157348840}
   - component: {fileID: 5438057197157348841}
   - component: {fileID: 5438057197157348842}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FlareSimple_01_Example
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -10203,7 +10203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bbf948217445d94f86b2fa87d690f0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifetime: 5
+  lifetime: 3
   sphere: {fileID: 1174175851650715044}
 --- !u!1 &1174175851830095383
 GameObject:

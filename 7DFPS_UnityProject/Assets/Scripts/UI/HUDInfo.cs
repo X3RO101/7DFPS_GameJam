@@ -45,6 +45,7 @@ public class HUDInfo : MonoBehaviour
     [SerializeField] private TextMeshProUGUI totalDamageTMP = null;
 
     [Header("Other UI Info")]
+    [SerializeField] private CanvasGroup hurtRadialCG = null;
     [SerializeField] private CanvasGroup levelUpPromptContainer = null;
     public UpgradeManager upgradeManager = null;
 
@@ -218,5 +219,10 @@ public class HUDInfo : MonoBehaviour
     {
         DamageNumber damageIndicator = Instantiate(damageIndicatorPrefab).GetComponent<DamageNumber>();
         return damageIndicator;
+    }
+
+    public void PromptHurtRadialUI()
+    {
+        hurtRadialCG.DOFade(1f, 0.25f).OnComplete(() => hurtRadialCG.DOFade(0f, 0.25f));
     }
 }

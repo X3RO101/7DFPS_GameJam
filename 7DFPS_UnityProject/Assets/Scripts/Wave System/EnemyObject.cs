@@ -96,6 +96,7 @@ public class EnemyObject : MonoBehaviour
             if(attackTimer >= attackRate)
             {
                 attackTimer = 0.0f;                             //reset enemy
+                GameManager.inst.gpManager.hudInfo.PromptHurtRadialUI();    //spawn radial red ui to give feedback
                 GameManager.inst.gpManager.player.hp -= damage; //lower player hp
                 GameManager.inst.gpManager.hudInfo.UpdateHP(GameManager.inst.gpManager.player.hp, GameManager.inst.gpManager.player.maxHP);
                 AudioManager.inst.Play("playerdamaged");
