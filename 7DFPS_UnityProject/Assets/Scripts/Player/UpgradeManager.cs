@@ -84,37 +84,37 @@ public class UpgradeManager : MonoBehaviour
         {
             // Modify the attacks/stats here in the respective switch case below
             // To get the current level for that particular stat -> playerStatLevels[i]
-            switch(i)
-            {
-                case 0: // ICE
-                    playerCombat.singleTargetIceDamage += (int)(playerCombat.singleTargetIceDamage * 0.5f);
-                    playerCombat.aoeIceDamage += (int)(playerCombat.aoeIceDamage * 0.15f);
-                    playerCombat.singleTargetIceCost = (int)(playerCombat.singleTargetIceCost * 0.5f);
-                    playerCombat.aoeIceCost = (int)(playerCombat.aoeIceCost * 0.5f);
-                    playerCombat.iceAmmo = playerCombat.maxIceAmmo;
-                    break;
-                case 1: // FIRE
-                    playerCombat.singleTargetFireDamage *= 2;//+= (int)(playerCombat.singleTargetFireDamage * 0.5f);
-                    playerCombat.aoeFireDamage *= 2; //+= (int)(playerCombat.aoeFireDamage * 0.5f);
-                    playerCombat.aoeFireCost = (int)(playerCombat.aoeFireCost * 0.5f);
-                    playerCombat.aoeFireCooldown = (int)(playerCombat.aoeFireCooldown * 0.75f);
-                    playerCombat.fireAmmo = playerCombat.maxFireAmmo;
-                    break;
-                case 2: // LIGHTNING
-                    playerCombat.singleTargetLightningDamage *= 3; //+= (int)(playerCombat.singleTargetLightningDamage * 0.25F);
-                    playerCombat.aoeLightningDamage *= 3;   //+= (int)(playerCombat.aoeLightningDamage * 0.25F);
-                    playerCombat.singleTargetLightningCost = (int)(playerCombat.singleTargetLightningCost * 0.75f);
-                    playerCombat.aoeLightningCost = (int)(playerCombat.aoeLightningCost * 0.75f);
-                    playerCombat.lightningAmmo = playerCombat.maxLightningAmmo;
-                    break;
-                case 3: // HP
-                    GameManager.inst.gpManager.player.maxHP *= 2;
-                    GameManager.inst.gpManager.player.hp = GameManager.inst.gpManager.player.maxHP;
-                    GameManager.inst.gpManager.hudInfo.UpdateHP(GameManager.inst.gpManager.player.hp, GameManager.inst.gpManager.player.maxHP);
-                    break;
-                default:
-                    break;
-            }
+            //switch(i)
+            //{
+            //    case 0: // ICE
+            //        playerCombat.singleTargetIceDamage += (int)(playerCombat.singleTargetIceDamage * 0.5f);
+            //        playerCombat.aoeIceDamage += (int)(playerCombat.aoeIceDamage * 0.15f);
+            //        playerCombat.singleTargetIceCost = (int)(playerCombat.singleTargetIceCost * 0.5f);
+            //        playerCombat.aoeIceCost = (int)(playerCombat.aoeIceCost * 0.5f);
+            //        playerCombat.iceAmmo = playerCombat.maxIceAmmo;
+            //        break;
+            //    case 1: // FIRE
+            //        playerCombat.singleTargetFireDamage *= 2;//+= (int)(playerCombat.singleTargetFireDamage * 0.5f);
+            //        playerCombat.aoeFireDamage *= 2; //+= (int)(playerCombat.aoeFireDamage * 0.5f);
+            //        playerCombat.aoeFireCost = (int)(playerCombat.aoeFireCost * 0.5f);
+            //        playerCombat.aoeFireCooldown = (int)(playerCombat.aoeFireCooldown * 0.75f);
+            //        playerCombat.fireAmmo = playerCombat.maxFireAmmo;
+            //        break;
+            //    case 2: // LIGHTNING
+            //        playerCombat.singleTargetLightningDamage *= 3; //+= (int)(playerCombat.singleTargetLightningDamage * 0.25F);
+            //        playerCombat.aoeLightningDamage *= 3;   //+= (int)(playerCombat.aoeLightningDamage * 0.25F);
+            //        playerCombat.singleTargetLightningCost = (int)(playerCombat.singleTargetLightningCost * 0.75f);
+            //        playerCombat.aoeLightningCost = (int)(playerCombat.aoeLightningCost * 0.75f);
+            //        playerCombat.lightningAmmo = playerCombat.maxLightningAmmo;
+            //        break;
+            //    case 3: // HP
+            //        GameManager.inst.gpManager.player.maxHP *= 2;
+            //        GameManager.inst.gpManager.player.hp = GameManager.inst.gpManager.player.maxHP;
+            //        GameManager.inst.gpManager.hudInfo.UpdateHP(GameManager.inst.gpManager.player.hp, GameManager.inst.gpManager.player.maxHP);
+            //        break;
+            //    default:
+            //        break;
+            //}
         }
     }
 
@@ -139,6 +139,40 @@ public class UpgradeManager : MonoBehaviour
 		Mathf.Clamp(playerStatLevels[increaseThis], 0, 9);
 		emptyPipContainers[increaseThis].transform.GetChild(playerStatLevels[increaseThis]).GetComponent<Image>().sprite = levelPipSpriteList[increaseThis];
 		playerStatLevels[increaseThis] += 1;
+
+        PlayerCombat playerCombat = GameManager.inst.gpManager.player.combat;
+
+        switch (increaseThis)
+        {
+            case 0: // ICE
+                playerCombat.singleTargetIceDamage += (int)(playerCombat.singleTargetIceDamage * 0.5f);
+                playerCombat.aoeIceDamage += (int)(playerCombat.aoeIceDamage * 0.15f);
+                playerCombat.singleTargetIceCost = (int)(playerCombat.singleTargetIceCost * 0.5f);
+                playerCombat.aoeIceCost = (int)(playerCombat.aoeIceCost * 0.5f);
+                playerCombat.iceAmmo = playerCombat.maxIceAmmo;
+                break;
+            case 1: // FIRE
+                playerCombat.singleTargetFireDamage *= 2;//+= (int)(playerCombat.singleTargetFireDamage * 0.5f);
+                playerCombat.aoeFireDamage *= 2; //+= (int)(playerCombat.aoeFireDamage * 0.5f);
+                playerCombat.aoeFireCost = (int)(playerCombat.aoeFireCost * 0.5f);
+                playerCombat.aoeFireCooldown = (int)(playerCombat.aoeFireCooldown * 0.75f);
+                playerCombat.fireAmmo = playerCombat.maxFireAmmo;
+                break;
+            case 2: // LIGHTNING
+                playerCombat.singleTargetLightningDamage *= 3; //+= (int)(playerCombat.singleTargetLightningDamage * 0.25F);
+                playerCombat.aoeLightningDamage *= 3;   //+= (int)(playerCombat.aoeLightningDamage * 0.25F);
+                playerCombat.singleTargetLightningCost = (int)(playerCombat.singleTargetLightningCost * 0.75f);
+                playerCombat.aoeLightningCost = (int)(playerCombat.aoeLightningCost * 0.75f);
+                playerCombat.lightningAmmo = playerCombat.maxLightningAmmo;
+                break;
+            case 3: // HP
+                GameManager.inst.gpManager.player.maxHP *= 2;
+                GameManager.inst.gpManager.player.hp = GameManager.inst.gpManager.player.maxHP;
+                GameManager.inst.gpManager.hudInfo.UpdateHP(GameManager.inst.gpManager.player.hp, GameManager.inst.gpManager.player.maxHP);
+                break;
+            default:
+                break;
+        }
 
         DecreaseUnusedLevels();
     }

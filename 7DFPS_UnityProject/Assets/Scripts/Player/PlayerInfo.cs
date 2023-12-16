@@ -32,6 +32,8 @@ public class PlayerInfo : MonoBehaviour
         GameManager.inst.gpManager.hudInfo.UpdateHP(hp, maxHP);
         GameManager.inst.gpManager.hudInfo.UpdateEXP(currExp, maxExp);
         GameManager.inst.gpManager.hudInfo.UpdateLevel(1);
+        GameManager.inst.gpManager.hudInfo.UpdateElementContainer(combat.equippedElement);
+        GameManager.inst.gpManager.hudInfo.UpdateCrosshair(combat.equippedElement);
     }
 
     private void FixedUpdate()

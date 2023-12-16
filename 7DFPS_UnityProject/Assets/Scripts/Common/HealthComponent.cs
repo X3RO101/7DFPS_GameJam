@@ -81,6 +81,7 @@ public class HealthComponent : MonoBehaviour
         //Check if player can level up, if he can, level up player and prompt level up text
         if(GameManager.inst.gpManager.player.isReadyToLevelUp)
         {
+            //Increase stats of enemy to scale with player
             GameManager.inst.gpManager.player.lv += 1;
             GameManager.inst.gpManager.player.currExp -= GameManager.inst.gpManager.player.maxExp;
             GameManager.inst.gpManager.player.maxExp = (int)(GameManager.inst.gpManager.player.maxExp * 1.2f);

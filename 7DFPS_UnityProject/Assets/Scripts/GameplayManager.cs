@@ -87,7 +87,6 @@ public class GameplayManager : MonoBehaviour
     {
         InitEnemySystem();
     }
-    float test = 1.0f;
 
     // Update is called once per frame
     void Update()

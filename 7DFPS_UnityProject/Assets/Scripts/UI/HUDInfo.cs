@@ -116,6 +116,12 @@ public class HUDInfo : MonoBehaviour
         elementPanelBorders[(int)previousElementType].DOColor(panelDefaultColor, 0.25f).SetAutoKill(true);
         elementPanelBorders[(int)newElementType].DOColor(panelSelectedColor, 0.25f).SetAutoKill(true);
     }
+    public void UpdateElementContainer(GameplayManager.ELEMENTS newElementType)
+    {
+        DOTween.Kill(elementPanelBorders[(int)newElementType]);
+
+        elementPanelBorders[(int)newElementType].DOColor(panelSelectedColor, 0.25f).SetAutoKill(true);
+    }
     public void SetCrosshairEnable(bool enable)
     {
         crosshairGO.SetActive(enable);

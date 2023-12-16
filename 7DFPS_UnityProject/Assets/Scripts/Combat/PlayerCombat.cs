@@ -71,6 +71,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void Start()
     {
+
     }
 
     private void Update()
@@ -108,7 +109,7 @@ public class PlayerCombat : MonoBehaviour
                 SingleTargetAttacks(equippedElement);
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             if (domainCharge >= 100.0f)
             {
