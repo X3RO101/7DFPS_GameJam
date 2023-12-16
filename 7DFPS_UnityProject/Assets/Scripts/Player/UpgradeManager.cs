@@ -173,6 +173,9 @@ public class UpgradeManager : MonoBehaviour
                 playerCombat.singleTargetLightningCost = (int)(playerCombat.singleTargetLightningCost * 0.75f);
                 playerCombat.aoeLightningCost = (int)(playerCombat.aoeLightningCost * 0.75f);
                 playerCombat.lightningAmmo = playerCombat.maxLightningAmmo;
+                
+                if (playerCombat.singleTargetLightningCost < 1)
+                    playerCombat.singleTargetLightningCost = 1;
 
                 if (playerCombat.aoeLightningCost < 5)
                     playerCombat.aoeLightningCost = 5;
