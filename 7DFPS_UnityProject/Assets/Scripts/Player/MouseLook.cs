@@ -39,6 +39,9 @@ public class MouseLook : MonoBehaviour
         //    return;
         //}
 
+        if (GameManager.inst.gpManager.player.died)
+            return;
+
         // Allow the script to clamp based on a desired target value.
         Quaternion targetOrientation = Quaternion.Euler(targetDirection);
 

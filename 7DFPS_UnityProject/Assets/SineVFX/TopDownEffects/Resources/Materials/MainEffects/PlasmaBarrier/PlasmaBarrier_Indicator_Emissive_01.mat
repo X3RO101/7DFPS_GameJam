@@ -79,7 +79,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Ramp:
-        m_Texture: {fileID: 2800000, guid: 6844a24f1b1b407e8deb3b0e4d3f41e5, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2bc6df4b6c334aa9989e3d7c322d69be, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SecondMask:
@@ -179,10 +179,10 @@ Material:
     - _DistortionUseSecondMaskSwitch: 1
     - _DistortionV: 1
     - _EMISSIONVERTEXSTREAMENABLED: 0
-    - _FinalOpacityExp: 1
+    - _FinalOpacityExp: 3.3
     - _FinalOpacityExp1: 1
     - _FinalOpacityPower: 1
-    - _FinalPower: 4
+    - _FinalPower: 10
     - _Float4: 0.25
     - _MainMaskExp: 1
     - _MainMaskScaleU: 1
@@ -244,7 +244,7 @@ Material:
     m_Colors:
     - _CustomColorMaskChannels: {r: 1, g: 0, b: 0, a: 0}
     - _CustomColorMaskChannels1: {r: 1, g: 0, b: 0, a: 0}
-    - _FinalColor: {r: 0.0141509175, g: 0.48581237, b: 1, a: 1}
+    - _FinalColor: {r: 0.74271286, g: 0.015686274, b: 1, a: 1}
     - _MainMaskChannelsMultiply: {r: 1, g: 1, b: 0, a: 0}
     - _Noise01ScrollSpeedUV: {r: 1, g: 1, b: 0, a: 0}
     - _RampColorTint: {r: 1, g: 0.3726415, b: 0.3726415, a: 1}

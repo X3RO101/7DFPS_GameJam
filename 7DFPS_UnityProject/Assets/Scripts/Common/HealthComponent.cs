@@ -19,14 +19,6 @@ public class HealthComponent : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
-            // Play death animation / particle system / sfx
-            EnemyObject tempEnemyObj = GetComponent<EnemyObject>();
-            if (tempEnemyObj != null)
-            {
-                tempEnemyObj.StopElementParticles();
-                GameManager.inst.gpManager.player.combat.SetEnemiesKilled(GameManager.inst.gpManager.player.combat.GetEnemiesKilled() + 1);
-                GameManager.inst.gpManager.player.combat.UpdateDomainChargeValue();
-            }
             // Coroutine so that the effects above can finishing playing before we disable this gameobject
             StartCoroutine(Kill());
         }
@@ -58,15 +50,18 @@ public class HealthComponent : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         gameObject.SetActive(false);
 
-        //Increase kill count for stats
-        GameManager.inst.gpManager.kills += 1;
-
         //Init death particle system on slime pos
         GameObject ps = Instantiate(deathPS);
         ps.transform.position = new Vector3(transform.position.x, 0.25f, transform.position.z);
 
         Color color = Color.red;
         EnemyObject enemyInfo = GetComponent<EnemyObject>();
+
+        //Update domain expansion values
+        enemyInfo.StopElementParticles();
+        GameManager.inst.gpManager.player.combat.SetEnemiesKilled(GameManager.inst.gpManager.player.combat.GetEnemiesKilled() + 1);
+        GameManager.inst.gpManager.player.combat.UpdateDomainChargeValue();
+
         if (enemyInfo.element == GameplayManager.ELEMENTS.ICE)
             color = Color.cyan;
         else if (enemyInfo.element == GameplayManager.ELEMENTS.LIGHTNING)
@@ -78,8 +73,12 @@ public class HealthComponent : MonoBehaviour
         //Give exp to player
         GameManager.inst.gpManager.player.currExp += (int)(250 * GameManager.inst.gpManager.player.lv * 0.8f);
 
+        //Add to stats
+        GameManager.inst.gpManager.expGained += GameManager.inst.gpManager.player.currExp;
+        GameManager.inst.gpManager.totalKills += 1;
+
         //Check if player can level up, if he can, level up player and prompt level up text
-        if(GameManager.inst.gpManager.player.isReadyToLevelUp)
+        if (GameManager.inst.gpManager.player.isReadyToLevelUp)
         {
             //Increase stats of enemy to scale with player
             GameManager.inst.gpManager.player.lv += 1;

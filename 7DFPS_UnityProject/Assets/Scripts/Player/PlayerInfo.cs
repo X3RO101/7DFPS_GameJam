@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerInfo : MonoBehaviour
 {
@@ -8,12 +9,16 @@ public class PlayerInfo : MonoBehaviour
     public PlayerCombat combat;
     public CameraSway camSway;
     public MouseLook mouseLook;
+    public bool died = false;
+    public bool inUpgradeManager = false;
     public int hp;
     public int maxHP;
     public int lv = 1;
     public int skillpoints = 0;
     public int currExp = 0;
     public int maxExp = 300;
+    
+
 
     public bool isReadyToLevelUp
     {
@@ -34,9 +39,10 @@ public class PlayerInfo : MonoBehaviour
         GameManager.inst.gpManager.hudInfo.UpdateLevel(1);
         GameManager.inst.gpManager.hudInfo.UpdateElementContainer(combat.equippedElement);
         GameManager.inst.gpManager.hudInfo.UpdateCrosshair(combat.equippedElement);
+        died = false;
     }
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
         if(Input.GetKeyDown(KeyCode.R))
         {
@@ -45,7 +51,27 @@ public class PlayerInfo : MonoBehaviour
                 //Show upgrade
                 GameManager.inst.gpManager.hudInfo.PromptLevelUpText(false);
                 GameManager.inst.gpManager.hudInfo.upgradeManager.OpenUpgradePanel();
+                inUpgradeManager = true;
             }
         }
+
+        if(!died)
+        {
+            if (hp <= 0)
+            {
+                Time.timeScale = 0;
+                GameManager.inst.gpManager.hudInfo.ShowGameOverScreen();
+                died = true;
+            }
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                SceneManager.LoadScene("MainMenuScene");
+                Time.timeScale = 1;
+            }
+        }
+
     }
 }

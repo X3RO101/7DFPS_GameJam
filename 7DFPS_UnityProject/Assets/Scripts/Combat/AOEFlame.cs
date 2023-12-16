@@ -19,16 +19,26 @@ public class AOEFlame : MonoBehaviour
             Color damageColor = Color.white;
             //Check if element can crit or is resistant to it (Set damage number to be gray if resistant, white for normal, yellow for crit)
             float damageMultiplier = 1.0f;
-            if (temp.element == GameplayManager.ELEMENTS.FIRE)
+
+            if(!GameManager.inst.gpManager.player.combat.GetDomainActiveStatus())
             {
-                damageMultiplier = GameManager.inst.gpManager.player.combat.weakMultiplier;
-                damageColor = Color.gray;
+                if (temp.element == GameplayManager.ELEMENTS.FIRE)
+                {
+                    damageMultiplier = GameManager.inst.gpManager.player.combat.weakMultiplier;
+                    damageColor = Color.gray;
+                }
+                else if (temp.element == GameplayManager.ELEMENTS.LIGHTNING)
+                {
+                    damageMultiplier = GameManager.inst.gpManager.player.combat.critMultiplier;
+                    damageColor = Color.yellow;
+                }
             }
-            else if (temp.element == GameplayManager.ELEMENTS.LIGHTNING)
+            else
             {
                 damageMultiplier = GameManager.inst.gpManager.player.combat.critMultiplier;
                 damageColor = Color.yellow;
             }
+
 
             //Calculate fire damage
             int fireDamage = (int)(GameManager.inst.gpManager.player.combat.aoeFireDamage * damageMultiplier);
@@ -45,6 +55,9 @@ public class AOEFlame : MonoBehaviour
             //Set object to stop moving for 0.1
             temp.StopAgentMovement(0.2f);
             temp.StopAnimation(0.2f);
+
+            //Add to stats
+            GameManager.inst.gpManager.totalDamage += damage;
         }
     }
 

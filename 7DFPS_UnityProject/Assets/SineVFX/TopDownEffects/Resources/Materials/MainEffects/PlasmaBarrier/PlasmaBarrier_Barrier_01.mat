@@ -78,7 +78,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Ramp:
-        m_Texture: {fileID: 2800000, guid: 5949d6ed8cb24f12aefa6691f1e3c12d, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2bc6df4b6c334aa9989e3d7c322d69be, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureSample0:
@@ -191,7 +191,7 @@ Material:
     - _RAMPENABLED: 0
     - _RampAffectedByDynamics: 1
     - _RampBlend: 0
-    - _RampOffsetExp: 8
+    - _RampOffsetExp: 5.8
     - _RampOffsetMultiply: 1
     - _RampRemapMaxNew: 1.25
     - _RampRemapMinOld: 0.5
@@ -224,7 +224,7 @@ Material:
     - _FrontSmokeColorOne: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 1}
     - _FrontSmokeColorTwo: {r: 0.06603694, g: 0.06603694, b: 0.06603694, a: 1}
     - _MainTexChannels: {r: 1, g: 0, b: 0, a: 0}
-    - _RampColorTint: {r: 0.6273585, g: 0.7482424, b: 1, a: 1}
+    - _RampColorTint: {r: 0.72473276, g: 0.32809716, b: 0.9528302, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &7629292096916938144
 MonoBehaviour:

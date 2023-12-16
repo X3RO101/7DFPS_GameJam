@@ -33,6 +33,17 @@ public class HUDInfo : MonoBehaviour
     [Header("Damage indicator")]
     [SerializeField] private GameObject damageIndicatorPrefab = null;
 
+    [Header("Domain Expansion UI")]
+    [SerializeField] private CanvasGroup domainExpansionIcon = null;
+    [SerializeField] private TextMeshProUGUI domainExpansionText = null;
+    [SerializeField] private Image domainExpansionColorContainer = null;
+
+    [Header("Game Over UI")]
+    [SerializeField] private CanvasGroup gameOverContainer = null;
+    [SerializeField] private TextMeshProUGUI totalKillsTMP = null;
+    [SerializeField] private TextMeshProUGUI totalEXPTMP = null;
+    [SerializeField] private TextMeshProUGUI totalDamageTMP = null;
+
     [Header("Other UI Info")]
     [SerializeField] private CanvasGroup levelUpPromptContainer = null;
     public UpgradeManager upgradeManager = null;
@@ -67,6 +78,49 @@ public class HUDInfo : MonoBehaviour
             UpdateElementAOEContainer(GameplayManager.ELEMENTS.LIGHTNING, false);
 
         return;
+    }
+    public void ShowGameOverScreen()
+    {
+        gameOverContainer.DOFade(1f, 0.25f).SetUpdate(true);
+        totalKillsTMP.text = "Total slimes defeated: " + GameManager.inst.gpManager.totalKills.ToString();
+        totalEXPTMP.text = "Total EXP gained: " + GameManager.inst.gpManager.expGained.ToString();
+        totalDamageTMP.text = "Total Damage dealt: " + GameManager.inst.gpManager.totalDamage.ToString();
+    }
+    public void UpdateDomainExpansionUI(float domainValue, float maxDomainValue, GameplayManager.ELEMENTS element)
+    {
+        //Update text only if value still below
+        if (domainValue < maxDomainValue)
+        {
+            domainExpansionText.gameObject.SetActive(true);
+            domainExpansionIcon.alpha = 0;
+            int value = (int)domainValue;
+            domainExpansionText.text = value.ToString();
+        }
+        else
+        {
+            domainExpansionText.gameObject.SetActive(false);
+            //Spawn icon
+            domainExpansionIcon.DOFade(1f, 0.35f);
+            SetDomainExpansionUIColor(element);
+        }
+    }
+    public void SetDomainExpansionUIColor(GameplayManager.ELEMENTS element)
+    {
+        switch (element)
+        {
+            case GameplayManager.ELEMENTS.ICE:
+                domainExpansionColorContainer.color = new Color32(0, 110, 219, 255);
+                break;
+            case GameplayManager.ELEMENTS.FIRE:
+                domainExpansionColorContainer.color = new Color32(245, 68, 86, 255);
+                break;
+            case GameplayManager.ELEMENTS.LIGHTNING:
+                domainExpansionColorContainer.color = new Color32(173, 51, 248, 255);
+                break;
+            default:
+                domainExpansionColorContainer.color = Color.black;
+                break;
+        }
     }
     public void UpdateAmmoCounter(int iceAmmo, int fireAmmo, int lightningAmmo)
     {

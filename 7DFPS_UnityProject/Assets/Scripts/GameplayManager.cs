@@ -13,7 +13,9 @@ public class GameplayManager : MonoBehaviour
 	public List<GameObject> enemyPrefabList;
     public List<GameObject> spawnPointList;
 
-    public int kills = 0;
+    public int totalKills = 0;
+    public int totalDamage = 0;
+    public int expGained = 0;
 
     // Scaling Settings
     public float waveFrequency = 10.0f; // How long to wait before spawning the next wave
@@ -86,6 +88,10 @@ public class GameplayManager : MonoBehaviour
     void Start()
     {
         InitEnemySystem();
+        //Init stats
+        totalDamage = 0;
+        expGained = 0;
+        totalKills = 0;
     }
 
     // Update is called once per frame
@@ -106,9 +112,11 @@ public class GameplayManager : MonoBehaviour
 
     IEnumerator SpawnDomainExpansion(ELEMENTS domain)
     {
-        GameObject temp = Instantiate(domainList[(int)domain], position: player.gameObject.transform.position, Quaternion.identity);
+        Vector3 pos = new Vector3(player.gameObject.transform.position.x, 0, player.gameObject.transform.position.z);
+        GameObject temp = Instantiate(domainList[(int)domain], position: pos, Quaternion.identity);
         yield return new WaitForSeconds(12.0f);
         player.combat.SetDomainActiveStatus(false);
+
         Destroy(temp);
     }
 

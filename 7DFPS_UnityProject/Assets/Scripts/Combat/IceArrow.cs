@@ -20,12 +20,21 @@ public class IceArrow : MonoBehaviour
             Color damageColor = Color.white;
             //Check if element can crit or is resistant to it (Set damage number to be gray if resistant, white for normal, yellow for crit)
             float damageMultiplier = 1.0f;
-            if (temp.element == GameplayManager.ELEMENTS.ICE)
+
+            if (!GameManager.inst.gpManager.player.combat.GetDomainActiveStatus())
             {
-                damageMultiplier = GameManager.inst.gpManager.player.combat.weakMultiplier;
-                damageColor = Color.gray;
+                if (temp.element == GameplayManager.ELEMENTS.ICE)
+                {
+                    damageMultiplier = GameManager.inst.gpManager.player.combat.weakMultiplier;
+                    damageColor = Color.gray;
+                }
+                else if (temp.element == GameplayManager.ELEMENTS.FIRE)
+                {
+                    damageMultiplier = GameManager.inst.gpManager.player.combat.critMultiplier;
+                    damageColor = Color.yellow;
+                }
             }
-            else if (temp.element == GameplayManager.ELEMENTS.FIRE)
+            else
             {
                 damageMultiplier = GameManager.inst.gpManager.player.combat.critMultiplier;
                 damageColor = Color.yellow;
@@ -48,6 +57,7 @@ public class IceArrow : MonoBehaviour
             //Set object to stop moving for 0.1
             temp.StopAgentMovement(0.2f);
             temp.StopAnimation(0.2f);
+            GameManager.inst.gpManager.totalDamage += damage;
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Obstacle") ||
             collision.gameObject.layer == LayerMask.NameToLayer("Ground"))

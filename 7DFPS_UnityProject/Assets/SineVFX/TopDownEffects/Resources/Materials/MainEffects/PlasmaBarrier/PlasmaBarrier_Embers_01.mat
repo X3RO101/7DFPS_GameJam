@@ -34,7 +34,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Ramp:
-        m_Texture: {fileID: 2800000, guid: 6844a24f1b1b407e8deb3b0e4d3f41e5, type: 3}
+        m_Texture: {fileID: 2800000, guid: a30c7f192d1749a1b03ab3f221a73a45, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _tex4coord:
@@ -82,7 +82,7 @@ Material:
     - _RampOffsetExp: 1
     - __dirty: 0
     m_Colors:
-    - _FinalColor: {r: 0, g: 0.6272721, b: 1, a: 1}
+    - _FinalColor: {r: 0.7993579, g: 0, b: 1, a: 1}
     - _MainTexChannels: {r: 1, g: 0, b: 0, a: 0}
     - _RampColorTint: {r: 1, g: 0.3537736, b: 0.3537736, a: 1}
   m_BuildTextureStacks: []

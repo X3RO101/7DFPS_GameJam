@@ -150,6 +150,12 @@ public class UpgradeManager : MonoBehaviour
                 playerCombat.singleTargetIceCost = (int)(playerCombat.singleTargetIceCost * 0.5f);
                 playerCombat.aoeIceCost = (int)(playerCombat.aoeIceCost * 0.5f);
                 playerCombat.iceAmmo = playerCombat.maxIceAmmo;
+
+                if (playerCombat.singleTargetIceCost < 1)
+                    playerCombat.singleTargetIceCost = 1;
+
+                if (playerCombat.aoeIceCost < 5)
+                    playerCombat.aoeIceCost = 5;
                 break;
             case 1: // FIRE
                 playerCombat.singleTargetFireDamage *= 2;//+= (int)(playerCombat.singleTargetFireDamage * 0.5f);
@@ -157,6 +163,9 @@ public class UpgradeManager : MonoBehaviour
                 playerCombat.aoeFireCost = (int)(playerCombat.aoeFireCost * 0.5f);
                 playerCombat.aoeFireCooldown = (int)(playerCombat.aoeFireCooldown * 0.75f);
                 playerCombat.fireAmmo = playerCombat.maxFireAmmo;
+
+                if (playerCombat.aoeFireCost < 5)
+                    playerCombat.aoeFireCost = 5;
                 break;
             case 2: // LIGHTNING
                 playerCombat.singleTargetLightningDamage *= 3; //+= (int)(playerCombat.singleTargetLightningDamage * 0.25F);
@@ -164,6 +173,9 @@ public class UpgradeManager : MonoBehaviour
                 playerCombat.singleTargetLightningCost = (int)(playerCombat.singleTargetLightningCost * 0.75f);
                 playerCombat.aoeLightningCost = (int)(playerCombat.aoeLightningCost * 0.75f);
                 playerCombat.lightningAmmo = playerCombat.maxLightningAmmo;
+
+                if (playerCombat.aoeLightningCost < 5)
+                    playerCombat.aoeLightningCost = 5;
                 break;
             case 3: // HP
                 GameManager.inst.gpManager.player.maxHP *= 2;
@@ -203,6 +215,7 @@ public class UpgradeManager : MonoBehaviour
 
         // Resume
         Time.timeScale = 1.0f;
+        GameManager.inst.gpManager.player.inUpgradeManager = false;
         GameManager.inst.gpManager.player.mouseLook.enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

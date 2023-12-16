@@ -76,8 +76,10 @@ public class PlayerCombat : MonoBehaviour
 
     private void Update()
     {
-        SwapElement(); //Call to swap elements if input key
+        if (GameManager.inst.gpManager.player.died || GameManager.inst.gpManager.player.inUpgradeManager)
+            return;
 
+        SwapElement(); //Call to swap elements if input key
 
         //Toggles AOE mode
         if(Input.GetMouseButtonDown(1))
@@ -109,7 +111,7 @@ public class PlayerCombat : MonoBehaviour
                 SingleTargetAttacks(equippedElement);
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             if (domainCharge >= 100.0f)
             {
@@ -148,26 +150,29 @@ public class PlayerCombat : MonoBehaviour
     }
     private void SwapElement()
     {
+        HUDInfo hud = GameManager.inst.gpManager.hudInfo;
+
         GameplayManager.ELEMENTS previousElement = equippedElement;
         if(Input.GetKey(KeyCode.Alpha1))
         {
             equippedElement = GameplayManager.ELEMENTS.ICE;
-            GameManager.inst.gpManager.hudInfo.UpdateCrosshair(equippedElement);
-            GameManager.inst.gpManager.hudInfo.UpdateElementContainer(equippedElement, previousElement);
+            hud.UpdateCrosshair(equippedElement);
+            hud.UpdateElementContainer(equippedElement, previousElement);
         }
         else if(Input.GetKey(KeyCode.Alpha2))
         {
             equippedElement = GameplayManager.ELEMENTS.FIRE;
-            GameManager.inst.gpManager.hudInfo.UpdateCrosshair(equippedElement);
-            GameManager.inst.gpManager.hudInfo.UpdateElementContainer(equippedElement, previousElement); 
+            hud.UpdateCrosshair(equippedElement);
+            hud.UpdateElementContainer(equippedElement, previousElement); 
         }
         else if(Input.GetKey(KeyCode.Alpha3))
         {
             equippedElement = GameplayManager.ELEMENTS.LIGHTNING;
-            GameManager.inst.gpManager.hudInfo.UpdateCrosshair(equippedElement);
-            GameManager.inst.gpManager.hudInfo.UpdateElementContainer(equippedElement, previousElement);
+            hud.UpdateCrosshair(equippedElement);
+            hud.UpdateElementContainer(equippedElement, previousElement);
         }
 
+        hud.SetDomainExpansionUIColor(equippedElement);
     }
     private void UpdateIndicator()
     {
@@ -188,9 +193,12 @@ public class PlayerCombat : MonoBehaviour
             case GameplayManager.ELEMENTS.ICE:
                 if (Input.GetMouseButtonDown(0))
                 {
-                    iceAmmo -= aoeIceCost;
-                    abilityCastTimer = 0.0f;
-                    abilityCooldown = aoeIceCooldown;
+                    if(isDomainActive)
+                    {
+                        iceAmmo -= aoeIceCost;
+                        abilityCastTimer = 0.0f;
+                        abilityCooldown = aoeIceCooldown;
+                    }
                     AOEIce();
                     //Disable indicator after using ability
                     aoeMode = false;
@@ -203,9 +211,12 @@ public class PlayerCombat : MonoBehaviour
             case GameplayManager.ELEMENTS.FIRE:
                 if (Input.GetMouseButtonDown(0))
                 {
-                    fireAmmo -= aoeFireCost;
-                    abilityCastTimer = 0.0f;
-                    abilityCooldown = aoeFireCooldown;
+                    if(!isDomainActive)
+                    {
+                        fireAmmo -= aoeFireCost;
+                        abilityCastTimer = 0.0f;
+                        abilityCooldown = aoeFireCooldown;
+                    }
                     AOEFire();
                     //Disable indicator after using ability
                     aoeMode = false;
@@ -217,9 +228,13 @@ public class PlayerCombat : MonoBehaviour
             case GameplayManager.ELEMENTS.LIGHTNING:
                 if (Input.GetMouseButtonDown(0))
                 {
-                    lightningAmmo -= aoeLightningCost;
-                    abilityCastTimer = 0.0f;
-                    abilityCooldown = aoeLightningCooldown;
+                    if(!isDomainActive)
+                    {
+                        lightningAmmo -= aoeLightningCost;
+                        abilityCastTimer = 0.0f;
+                        abilityCooldown = aoeLightningCooldown;
+                    }
+
                     AOELightning();
                     //Disable indicator after using ability
                     aoeMode = false;
@@ -254,23 +269,27 @@ public class PlayerCombat : MonoBehaviour
         switch(elementType)
         {
             case GameplayManager.ELEMENTS.ICE:
-                if (iceAmmo == 0)
+                if (iceAmmo == 0 && !isDomainActive)
                     break;
                 
                 if (Input.GetMouseButtonDown(0))
                 {
-                    iceAmmo -= singleTargetIceCost;
-                    if (iceAmmo < 0)
-                        iceAmmo = 0;
+                    if(!isDomainActive)
+                    {
+                        iceAmmo -= singleTargetIceCost;
+                        if (iceAmmo < 0)
+                            iceAmmo = 0;
 
-                    abilityCastTimer = 0.0f;
-                    abilityCooldown = singleTargetIceCooldown;
+                        abilityCastTimer = 0.0f;
+                        abilityCooldown = singleTargetIceCooldown;
+                    }
+
                     SingleTargetIce();
                 }
 
                 break;
             case GameplayManager.ELEMENTS.FIRE:
-                if (fireAmmo == 0)
+                if (fireAmmo == 0 && !isDomainActive)
                     break;
 
                 if (Input.GetMouseButtonDown(0))
@@ -286,9 +305,12 @@ public class PlayerCombat : MonoBehaviour
                     {
                         if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Enemy"))
                         {
-                            fireAmmo -= singleTargetFireCost;
-                            if (fireAmmo < 0)
-                                fireAmmo = 0;
+                            if(!isDomainActive)
+                            {
+                                fireAmmo -= singleTargetFireCost;
+                                if (fireAmmo < 0)
+                                    fireAmmo = 0;
+                            }
                             SingleTargetFire(hit.collider.gameObject);
 						}
                             
@@ -296,17 +318,21 @@ public class PlayerCombat : MonoBehaviour
                 }
                 break;
             case GameplayManager.ELEMENTS.LIGHTNING:
-                if (lightningAmmo == 0)
+                if (lightningAmmo == 0 && !isDomainActive)
                     break;
 
                 if (Input.GetMouseButtonDown(0))
                 {
-                    lightningAmmo -= singleTargetLightningCost;
-                    if (lightningAmmo < 0)
-                        lightningAmmo = 0;
+                    if(!isDomainActive)
+                    {
+                        lightningAmmo -= singleTargetLightningCost;
+                        if (lightningAmmo < 0)
+                            lightningAmmo = 0;
 
-                    abilityCastTimer = 0.0f;
-                    abilityCooldown = singleTargetLightningCooldown;
+                        abilityCastTimer = 0.0f;
+                        abilityCooldown = singleTargetLightningCooldown;
+                    }
+
                     SingleTargetLightning();
                 }
                 break;
@@ -350,12 +376,21 @@ public class PlayerCombat : MonoBehaviour
         Color damageColor = Color.white;
         //Check if element can crit or is resistant to it (Set damage number to be gray if resistant, white for normal, yellow for crit)
         float damageMultiplier = 1.0f;
-        if (temp.element == GameplayManager.ELEMENTS.FIRE)
+
+        if(!isDomainActive)
         {
-            damageMultiplier = weakMultiplier;
-            damageColor = Color.gray;
+            if (temp.element == GameplayManager.ELEMENTS.FIRE)
+            {
+                damageMultiplier = weakMultiplier;
+                damageColor = Color.gray;
+            }
+            else if (temp.element == GameplayManager.ELEMENTS.LIGHTNING)
+            {
+                damageMultiplier = critMultiplier;
+                damageColor = Color.yellow;
+            }
         }
-        else if (temp.element == GameplayManager.ELEMENTS.LIGHTNING)
+        else
         {
             damageMultiplier = critMultiplier;
             damageColor = Color.yellow;
@@ -375,11 +410,13 @@ public class PlayerCombat : MonoBehaviour
         //Set object to stop moving for 0.1
         temp.StopAgentMovement(0.15f);
         temp.StopAnimation(0.15f);
+        GameManager.inst.gpManager.totalDamage += damage;
     }
 
     public void UpdateDomainChargeValue()
     {
         domainCharge = enemiesKilled / enemiesRequired * 100.0f;
+        GameManager.inst.gpManager.hudInfo.UpdateDomainExpansionUI(domainCharge, 100.0f, equippedElement);
     }
     public float GetEnemiesKilled()
     {
