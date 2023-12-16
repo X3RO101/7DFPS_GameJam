@@ -6,7 +6,7 @@ public class ScalingManager : MonoBehaviour
 {
     public float scalingFrequency = 30.0f;
 
-    public float waveFrequency = 3.0f; // how long to wait before spawning the next wave
+    public float waveFrequency = 5.0f; // how long to wait before spawning the next wave
     public int groupSpawnCount = 1; // how many spawners should we activate
 
     // Enemy stats will be -> (Base Stats * Multiplier) + Additive
@@ -90,9 +90,9 @@ public class ScalingManager : MonoBehaviour
 
     private void IncreaseDifficultyScale()
     {
-        if (enemyCount < 10 && timeElapsed >= 15.0f)
+        if (enemyCount < 7 && timeElapsed >= 45.0f)
         {
-            enemyCount = 10;
+            enemyCount = 8;
         }
         
     }

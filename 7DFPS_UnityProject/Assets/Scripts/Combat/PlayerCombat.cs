@@ -205,6 +205,8 @@ public class PlayerCombat : MonoBehaviour
                     aoeIndicator.SetActive(false);
                     //Enable crosshair again
                     GameManager.inst.gpManager.hudInfo.SetCrosshairEnable(true);
+
+                    AudioManager.inst.Play("iceaoe");
                 }
 
                 break;
@@ -223,6 +225,8 @@ public class PlayerCombat : MonoBehaviour
                     aoeIndicator.SetActive(false);
                     //Enable crosshair again
                     GameManager.inst.gpManager.hudInfo.SetCrosshairEnable(true);
+
+                    AudioManager.inst.Play("fireaoe");
                 }
                 break;
             case GameplayManager.ELEMENTS.LIGHTNING:
@@ -311,6 +315,7 @@ public class PlayerCombat : MonoBehaviour
                                 if (fireAmmo < 0)
                                     fireAmmo = 0;
                             }
+                            AudioManager.inst.Play("firesingle");
                             SingleTargetFire(hit.collider.gameObject);
 						}
                             
@@ -333,6 +338,7 @@ public class PlayerCombat : MonoBehaviour
                         abilityCooldown = singleTargetLightningCooldown;
                     }
 
+                    AudioManager.inst.Play("lightningsingle");
                     SingleTargetLightning();
                 }
                 break;

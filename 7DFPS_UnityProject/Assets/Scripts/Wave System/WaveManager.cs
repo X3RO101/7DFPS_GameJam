@@ -48,12 +48,14 @@ public class WaveManager : MonoBehaviour
             float[] enemyStatModiers = { sm.statMultiplier, sm.statAdditive};
             int enemyDamage = sm.enemyDamage;
 
-            GameplayManager.ELEMENTS elementType = sm.GetElementTypeToSpawn();
+            GameplayManager.ELEMENTS elementType;
 
             for (int i = 0; i < sm.groupSpawnCount; ++i)
             {
-                // choose the furtherest spawnpoint
-                SpawnPoint temp = ChooseSpawnPoint();
+				elementType = sm.GetElementTypeToSpawn();
+
+				// choose the furtherest spawnpoint
+				SpawnPoint temp = ChooseSpawnPoint();
 
                 // check with scaling manager what type of enemy to spawn (zombie, charger etc)
                 GameplayManager.ENEMY_TYPE enemyType = sm.GetEnemyTypeToSpawn();

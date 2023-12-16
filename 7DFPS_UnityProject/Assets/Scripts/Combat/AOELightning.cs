@@ -21,6 +21,7 @@ public class AOELightning : MonoBehaviour
     {
         lightningStrikeTimer = stopTimer = 0.0f;
         StartCoroutine("DestroyAOE");
+        StartCoroutine(GameManager.inst.gpManager.PlayLightningAOEAudio());
     }
 
     private void Update()
@@ -31,7 +32,7 @@ public class AOELightning : MonoBehaviour
             sphere.enabled = true;
             lightningStrikeTimer += 1 * Time.deltaTime;
             stopTimer += 1 * Time.deltaTime;
-        }
+		}
         else if(startIdleTimer > startingIdleTime && stopTimer > stopTime)
         {
             sphere.enabled = false;
@@ -45,12 +46,14 @@ public class AOELightning : MonoBehaviour
         {
             Debug.Log("Check collision");
             lightningStrikeTimer = 0.0f;
-            if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+
+			if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
-                //Debug.Log("Do hit now!");
-                //Attack enemies in here
-                //Debug.Log("Hit enemy");
-                EnemyObject temp = collision.gameObject.GetComponent<EnemyObject>();
+
+				//Debug.Log("Do hit now!");
+				//Attack enemies in here
+				//Debug.Log("Hit enemy");
+				EnemyObject temp = collision.gameObject.GetComponent<EnemyObject>();
                 Color damageColor = Color.white;
                 //Check if element can crit or is resistant to it (Set damage number to be gray if resistant, white for normal, yellow for crit)
                 float damageMultiplier = 1.0f;
