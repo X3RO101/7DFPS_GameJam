@@ -16,10 +16,15 @@ public class GameplayManager : MonoBehaviour
     public int kills = 0;
 
     // Scaling Settings
+    [Header("Scaling Settings")]
     public float waveFrequency = 10.0f; // How long to wait before spawning the next wave
 	public float statMultiplier = 1.0f; // how much to multiply the stats by
 	public float statAdditive = 0.0f; // how much to add the stats by
 
+    [Header("Power Ups")]
+    public GameObject powerupContainer;
+    public float powerupFrequency = 15.0f;
+    private float powerupBounceTime = 0.0f;
 
 	[HideInInspector] public EnemyObjectPool enemyObjectPool;
     [HideInInspector] public WaveManager waveManager;
@@ -86,16 +91,24 @@ public class GameplayManager : MonoBehaviour
     void Start()
     {
         InitEnemySystem();
+        ClearPowerUps();
+        powerupBounceTime = powerupFrequency;
     }
 
     // Update is called once per frame
     void Update()
     {
-  //      // Pause the game and open the upgrade panel
-		//if (Input.GetKeyDown(KeyCode.P))
-  //      {
-  //          UpgradeManager.inst.OpenUpgradePanel();
-		//}
+        // Randomly spawn a power up after a set amount of time
+        if (powerupBounceTime <= 0.0f && CheckForActivePowerUps() == false)
+        {
+            int temp = Random.Range(0, 3);
+            SpawnPowerUp((ELEMENTS)temp);
+            powerupBounceTime = powerupFrequency;
+        }
+        else
+        {
+            powerupBounceTime -= Time.deltaTime;
+        }
 	}
 
     public void DomainExpansion()
@@ -142,11 +155,40 @@ public class GameplayManager : MonoBehaviour
         scalingManager.statAdditive = statAdditive;
     }
 
-    // Show the upgrade panel at the end of every wave
-    public void ShowUpgradePanel()
+    public void SpawnPowerUp(ELEMENTS element)
     {
-
+        switch(element)
+        {
+            case ELEMENTS.ICE:
+                powerupContainer.transform.GetChild(0).gameObject.SetActive(true);
+                break;
+            case ELEMENTS.FIRE:
+                powerupContainer.transform.GetChild(1).gameObject.SetActive(true);
+                break;
+            case ELEMENTS.LIGHTNING:
+                powerupContainer.transform.GetChild(2).gameObject.SetActive(true);
+                break;
+        }
     }
 
+    public void ClearPowerUps()
+    {
+        for (int i = 0; i < 3; ++i)
+        {
+            powerupContainer.transform.GetChild(i).gameObject.SetActive(false);
+        }
+    }
 
+    private bool CheckForActivePowerUps()
+    {
+        for (int i = 0; i < 3; ++i)
+        {
+            if (powerupContainer.transform.GetChild(i).gameObject.activeSelf)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

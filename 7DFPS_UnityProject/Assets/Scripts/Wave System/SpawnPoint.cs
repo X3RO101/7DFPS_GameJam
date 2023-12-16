@@ -20,7 +20,7 @@ public class SpawnPoint : MonoBehaviour
         
     }
 
-    public void SpawnZombie(int enemyCount, float statMultiplier, float statAdditive, GameplayManager.ELEMENTS elementType)
+    public void SpawnZombie(int enemyCount, float statMultiplier, float statAdditive, int damage, GameplayManager.ELEMENTS elementType)
     {
         GameObject temp = null;
         EnemyObject tempEnemyObj = null;
@@ -31,9 +31,10 @@ public class SpawnPoint : MonoBehaviour
 			temp.transform.position = this.transform.position;
 
             // TO ADD ENEMY STATS CODE HERE, modify healthcomponent, element etc
-            // Enemy HP
-            tempEnemyObj.hp.SetMaxHealth((int)((tempEnemyObj.hp.GetMaxHealth() * statMultiplier) + statAdditive));
+            // Enemy HP and Damage
+            tempEnemyObj.hp.SetMaxHealth((int)((tempEnemyObj.hp.GetMaxHealth() + statAdditive) * statMultiplier));
             tempEnemyObj.hp.SetCurrentHealth(tempEnemyObj.hp.GetMaxHealth());
+            tempEnemyObj.damage = damage;
 
             // Enemy Element, changes to visuals based on the element
             tempEnemyObj.element = elementType;

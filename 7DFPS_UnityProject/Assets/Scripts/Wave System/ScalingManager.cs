@@ -12,6 +12,7 @@ public class ScalingManager : MonoBehaviour
     // Enemy stats will be -> (Base Stats * Multiplier) + Additive
     public float statMultiplier = 1.0f; // how much to multiply the stats by
     public float statAdditive = 0.0f; // how much to add the stats by
+    public int enemyDamage = 15; // default damage of the enemy, to be increased everytime the player gains a skill point
 
     // Enemy count modifiers
     public int enemyCount = 5;
@@ -43,25 +44,27 @@ public class ScalingManager : MonoBehaviour
     // Decides what enemy to spawn depending on the time lapsed, or player current weapons
     public GameplayManager.ENEMY_TYPE GetEnemyTypeToSpawn()
     {
-        // Placeholder time
-        if (timeElapsed < 300.0f)
-        {
-			return GameplayManager.ENEMY_TYPE.ZOMBIE;
-		}
-        else
-        {
-            // we only spawn other enemy types after a certain amount of time
-            float rand = Random.Range(0.0f, 1.0f);
-            if (rand < 0.7f)
-            {
-                return GameplayManager.ENEMY_TYPE.ZOMBIE;
-            }
-            else
-            {
-                return GameplayManager.ENEMY_TYPE.ZOMBIE;   // Change this line to another enemy type i.e. charger
-            }
+        return GameplayManager.ENEMY_TYPE.ZOMBIE;
 
-        }
+  //      // Placeholder time
+  //      if (timeElapsed < 300.0f)
+  //      {
+		//	return GameplayManager.ENEMY_TYPE.ZOMBIE;
+		//}
+  //      else
+  //      {
+  //          // we only spawn other enemy types after a certain amount of time
+  //          float rand = Random.Range(0.0f, 1.0f);
+  //          if (rand < 0.7f)
+  //          {
+  //              return GameplayManager.ENEMY_TYPE.ZOMBIE;
+  //          }
+  //          else
+  //          {
+  //              return GameplayManager.ENEMY_TYPE.ZOMBIE;   // Change this line to another enemy type i.e. charger
+  //          }
+
+  //      }
 	}
 
     public GameplayManager.ELEMENTS GetElementTypeToSpawn()

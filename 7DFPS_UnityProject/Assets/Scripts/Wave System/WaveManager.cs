@@ -45,7 +45,9 @@ public class WaveManager : MonoBehaviour
 
             UpdateSpawnDistances(false);
             float enemyCount = sm.enemyCount * sm.enemyCountMultiplier;
-            float[] enemyStatModiers = { sm.statMultiplier, sm.statAdditive };
+            float[] enemyStatModiers = { sm.statMultiplier, sm.statAdditive};
+            int enemyDamage = sm.enemyDamage;
+
             GameplayManager.ELEMENTS elementType = sm.GetElementTypeToSpawn();
 
             for (int i = 0; i < sm.groupSpawnCount; ++i)
@@ -59,7 +61,7 @@ public class WaveManager : MonoBehaviour
                 switch(enemyType)
                 {
                     case GameplayManager.ENEMY_TYPE.ZOMBIE:
-                        temp.SpawnZombie((int)(sm.enemyCount * sm.enemyCountMultiplier), enemyStatModiers[0], enemyStatModiers[1], elementType);
+                        temp.SpawnZombie((int)(sm.enemyCount * sm.enemyCountMultiplier), enemyStatModiers[0], enemyStatModiers[1], enemyDamage, elementType);
                         break;
                     default:
                         break;
