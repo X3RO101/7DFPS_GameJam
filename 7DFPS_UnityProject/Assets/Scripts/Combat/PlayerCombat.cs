@@ -63,6 +63,11 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private GameObject aoeLightningPrefab = null;
     [SerializeField] private GameObject aoeIcePrefab = null;
 
+    [Header("Domain Expansion")]
+    [SerializeField] private float enemiesRequired = 100; // How many enemies need to be killed before the player can use Domain Expansion
+    private float domainCharge = 0.0f; // Percentage value, used to render the ult charge on the ui
+    private float enemiesKilled = 0; // Number of enemies killed
+    private bool isDomainActive = false;
 
     private void Start()
     {
@@ -101,6 +106,16 @@ public class PlayerCombat : MonoBehaviour
                 AOEAttacks(equippedElement);
             else
                 SingleTargetAttacks(equippedElement);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (domainCharge >= 100.0f)
+            {
+                GameManager.inst.gpManager.DomainExpansion();
+                enemiesKilled = 0;
+                UpdateDomainChargeValue();
+            }
         }
     }
     //returns true if specified element type has sufficient ammo to cast aoe
@@ -359,5 +374,32 @@ public class PlayerCombat : MonoBehaviour
         //Set object to stop moving for 0.1
         temp.StopAgentMovement(0.15f);
         temp.StopAnimation(0.15f);
+    }
+
+    public void UpdateDomainChargeValue()
+    {
+        domainCharge = enemiesKilled / enemiesRequired * 100.0f;
+    }
+    public float GetEnemiesKilled()
+    {
+        return enemiesKilled;
+    }
+    public void SetEnemiesKilled(float setthis)
+    {
+        enemiesKilled = setthis;
+    }
+
+    public float GetDomainChargeValue()
+    {
+        return domainCharge;
+    }
+    
+    public bool GetDomainActiveStatus()
+    {
+        return isDomainActive;
+    }
+    public void SetDomainActiveStatus(bool setthis)
+    {
+        isDomainActive = setthis;
     }
 }

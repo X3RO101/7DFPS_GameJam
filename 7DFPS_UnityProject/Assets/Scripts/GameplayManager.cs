@@ -87,6 +87,7 @@ public class GameplayManager : MonoBehaviour
     {
         InitEnemySystem();
     }
+    float test = 1.0f;
 
     // Update is called once per frame
     void Update()
@@ -98,10 +99,17 @@ public class GameplayManager : MonoBehaviour
 		//}
 	}
 
-    IEnumerator DomainExpansion(ELEMENTS domain)
+    public void DomainExpansion()
     {
-        GameObject temp = Instantiate(domainList[(int)domain], player.gameObject.transform);
+		player.combat.SetDomainActiveStatus(true);
+		StartCoroutine(SpawnDomainExpansion(GameManager.inst.gpManager.player.GetComponent<PlayerCombat>().equippedElement));   
+	}
+
+    IEnumerator SpawnDomainExpansion(ELEMENTS domain)
+    {
+        GameObject temp = Instantiate(domainList[(int)domain], position: player.gameObject.transform.position, Quaternion.identity);
         yield return new WaitForSeconds(12.0f);
+        player.combat.SetDomainActiveStatus(false);
         Destroy(temp);
     }
 
