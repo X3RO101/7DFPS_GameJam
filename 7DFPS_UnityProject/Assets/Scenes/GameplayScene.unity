@@ -7951,7 +7951,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 1000
-  field of view: 70
+  field of view: 75
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -9492,6 +9492,7 @@ GameObject:
   - component: {fileID: 518897865}
   - component: {fileID: 518897868}
   - component: {fileID: 518897867}
+  - component: {fileID: 518897869}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -9559,7 +9560,7 @@ MonoBehaviour:
   info: {fileID: 518897866}
   controller: {fileID: 0}
   movement: {x: 0, y: 0, z: 1}
-  maxSpeed: 5
+  maxSpeed: 8
   jumpForce: 13
   antiBump: 4.5
   gravity: 30
@@ -9663,6 +9664,27 @@ MonoBehaviour:
     type: 3}
   aoeIcePrefab: {fileID: 1174175851650715046, guid: 7c9f1073f79f40c48ac118dea4cec9d4,
     type: 3}
+--- !u!65 &518897869
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518897862}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.8, y: 2, z: 0.8}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &526219659
 GameObject:
   m_ObjectHideFlags: 0
@@ -11690,12 +11712,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'INCREASES DAMAGE (1.5X)
+  m_text: 'INCREASES DAMAGE (2X)
 
     lowers aoe cost by 50%
 
-    DECREASE AOE
-    COOLDOWN by 25%'
+    DECREASE AOE COOLDOWN
+    by 25%'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7c2b89dcaacc4f54cb78321564bd8679, type: 2}
   m_sharedMaterial: {fileID: -5016107910796237034, guid: 7c2b89dcaacc4f54cb78321564bd8679,
@@ -12655,7 +12677,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'INCREASES DAMAGE (1.15X)
+  m_text: 'INCREASES DAMAGE (1.5X)
 
     LOWERS COST BY 50%'
   m_isRightToLeft: 0
@@ -14780,6 +14802,42 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 994210392}
   m_Mesh: {fileID: 4300000, guid: 3f85dc73dcce79a41a98271b2cfd4c7b, type: 3}
+--- !u!1 &995941886
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 995941887}
+  m_Layer: 5
+  m_Name: UltimateContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &995941887
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995941886}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1822801946}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1001886826
 GameObject:
   m_ObjectHideFlags: 0
@@ -14840,7 +14898,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'RESTORES HEALTH
 
-    INCREASES MAX HP BY 50%'
+    INCREASE MAX HEALTH (2X)'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7c2b89dcaacc4f54cb78321564bd8679, type: 2}
   m_sharedMaterial: {fileID: -5016107910796237034, guid: 7c2b89dcaacc4f54cb78321564bd8679,
@@ -16276,7 +16334,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'INCREASES DAMAGE (1.25X)
+  m_text: 'INCREASES DAMAGE (3X)
 
     LOWERS COST BY 25%'
   m_isRightToLeft: 0
@@ -33043,6 +33101,7 @@ RectTransform:
   - {fileID: 428013230}
   - {fileID: 413452564}
   - {fileID: 2101726625}
+  - {fileID: 995941887}
   - {fileID: 1258944507}
   - {fileID: 1059216241}
   m_Father: {fileID: 0}
@@ -39366,6 +39425,7 @@ MonoBehaviour:
   - {fileID: 1783360875}
   - {fileID: 696813388}
   - {fileID: 1900076795}
+  kills: 0
   waveFrequency: 10
   statMultiplier: 1
   statAdditive: 0

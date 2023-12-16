@@ -80,19 +80,20 @@ public class HealthComponent : MonoBehaviour
         if(GameManager.inst.gpManager.player.isReadyToLevelUp)
         {
             GameManager.inst.gpManager.player.lv += 1;
-            GameManager.inst.gpManager.player.skillpoints += 1;
             GameManager.inst.gpManager.player.currExp -= GameManager.inst.gpManager.player.maxExp;
             GameManager.inst.gpManager.player.maxExp = (int)(GameManager.inst.gpManager.player.maxExp * 1.2f);
-
             GameManager.inst.gpManager.hudInfo.UpdateLevel(GameManager.inst.gpManager.player.lv);
 
-            //Prompt level up text if needed
-            if (!GameManager.inst.gpManager.hudInfo.isLevelUpPromptEnabled)
+            if (GameManager.inst.gpManager.player.lv % 3 == 0)
             {
-                GameManager.inst.gpManager.hudInfo.PromptLevelUpText(true);
+                GameManager.inst.gpManager.player.skillpoints += 1;
+                //Prompt level up text if needed
+                if (!GameManager.inst.gpManager.hudInfo.isLevelUpPromptEnabled)
+                {
+                    GameManager.inst.gpManager.hudInfo.PromptLevelUpText(true);
+                }
             }
         }
         GameManager.inst.gpManager.hudInfo.UpdateEXP(GameManager.inst.gpManager.player.currExp, GameManager.inst.gpManager.player.maxExp);
-        
     }
 }

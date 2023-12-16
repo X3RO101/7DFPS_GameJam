@@ -76,12 +76,12 @@ public class HUDInfo : MonoBehaviour
     }
     public void UpdateHP(int hp,int maxHP)
     {
-        playerHPBar.value = hp / maxHP;
+        playerHPBar.value = (float)hp / (float)maxHP;
         playerHPText.text = hp.ToString() + "/" + maxHP.ToString();
     }
     public void UpdateEXP(int exp, int maxEXP)
     {
-        playerEXPBar.value = exp / maxEXP;
+        playerEXPBar.value = (float)exp / (float)maxEXP;
         playerEXPText.text = exp.ToString() + "/" + maxEXP.ToString();
     }
     public void UpdateLevel(int lv)

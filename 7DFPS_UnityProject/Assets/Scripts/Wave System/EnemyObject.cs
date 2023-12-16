@@ -13,7 +13,6 @@ public class EnemyObject : MonoBehaviour
     public SkinnedMeshRenderer mr; // mesh renderer component, lets us hotswap materials at runtime (can be used to change material depending on element)
     private Animator animator; // animation controller
     public HealthComponent hp; // health component to get/set hp related things
-    public int damage; // damage to deal to the player when in contact
 
     
     [HideInInspector] public Material normalMat;
@@ -29,6 +28,11 @@ public class EnemyObject : MonoBehaviour
 
     [Header("Particle Effects")]
     public GameObject[] elementParticleList;
+
+    [Header("Attacking Player Info")]
+    public int damage = 15;
+    public float attackRate = 0.25f;        //enemy attacks every 0.25s if player is colliding with player
+    [SerializeField] private float attackTimer = 0.0f;
 
     private enum EnemyAnimationState
     {
@@ -67,17 +71,42 @@ public class EnemyObject : MonoBehaviour
 				break;
 		}
 
-		//if (bouncetime <= 0.0f)
-		//{
-		//	FlashWhite();
-		//	//hp.SetCurrentHealth(hp.GetCurrentHealth() - 1);
-		//	bouncetime = 3.0f;
-		//}
-		//else
-		//{
-		//	bouncetime -= Time.deltaTime;
-		//}
+        //if (bouncetime <= 0.0f)
+        //{
+        //	FlashWhite();
+        //	//hp.SetCurrentHealth(hp.GetCurrentHealth() - 1);
+        //	bouncetime = 3.0f;
+        //}
+        //else
+        //{
+        //	bouncetime -= Time.deltaTime;
+        //}
+
+        if (attackTimer < attackRate)
+            attackTimer += 1f * Time.deltaTime;
 	}
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            attackTimer = attackRate;   //make player get hit by enemy the moment player collides with enemy
+        }
+    }
+    //Collision detection with enemy
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            if(attackTimer >= attackRate)
+            {
+                attackTimer = 0.0f;                             //reset enemy
+                GameManager.inst.gpManager.player.hp -= damage; //lower player hp
+                GameManager.inst.gpManager.hudInfo.UpdateHP(GameManager.inst.gpManager.player.hp, GameManager.inst.gpManager.player.maxHP);
+            }
+        }
+    }
+
 
     // Changes the animation state of the enemy to the one specified
     private void UpdateAnimationState(EnemyAnimationState setthis)
