@@ -54007,7 +54007,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd047318677a23a4994bf549110db84a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifetime: 10
+  lifetime: 7
   sphere: {fileID: 7001186043161274766}
   startingIdleTime: 0.8
   startIdleTimer: 0

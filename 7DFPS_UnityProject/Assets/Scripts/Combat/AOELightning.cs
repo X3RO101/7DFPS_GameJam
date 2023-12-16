@@ -19,30 +19,35 @@ public class AOELightning : MonoBehaviour
 
     private void Start()
     {
+        lightningStrikeTimer = stopTimer = 0.0f;
         StartCoroutine("DestroyAOE");
     }
 
     private void Update()
     {
         startIdleTimer += 1 * Time.deltaTime;
-        if (startIdleTimer > startingIdleTime)
+        if (startIdleTimer > startingIdleTime && stopTimer < stopTime)
         {
             sphere.enabled = true;
-
             lightningStrikeTimer += 1 * Time.deltaTime;
             stopTimer += 1 * Time.deltaTime;
+        }
+        else if(startIdleTimer > startingIdleTime && stopTimer > stopTime)
+        {
+            sphere.enabled = false;
+            Debug.Log("Disabled sphere");
         }
     }
 
     private void OnTriggerStay(Collider collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        if (lightningStrikeTimer > lightningStrikeRate)
         {
-            if (lightningStrikeTimer > lightningStrikeRate && stopTimer <= stopTime)
+            Debug.Log("Check collision");
+            lightningStrikeTimer = 0.0f;
+            if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
                 //Debug.Log("Do hit now!");
-                lightningStrikeTimer = 0.0f;
-               
                 //Attack enemies in here
                 //Debug.Log("Hit enemy");
                 EnemyObject temp = collision.gameObject.GetComponent<EnemyObject>();
@@ -85,7 +90,7 @@ public class AOELightning : MonoBehaviour
 
                 GameManager.inst.gpManager.totalDamage += damage;
             }
-		}
+        }
     }
 
     private IEnumerator DestroyAOE()

@@ -307,8 +307,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.5, y: 0.6, z: 0.5}
-  m_Center: {x: 0, y: 0.3, z: 0}
+  m_Size: {x: 0.5, y: 15, z: 0.5}
+  m_Center: {x: 0, y: 7.5, z: 0}
 --- !u!54 &4869629883761174122
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -353,7 +353,6 @@ MonoBehaviour:
   mr: {fileID: 2750582282173289973}
   animator: {fileID: 2422589100400264955}
   hp: {fileID: 7674671021754053427}
-  damage: 15
   normalMat: {fileID: 2100000, guid: 2df5e0cd83bff504bb1cb643cd6c2df5, type: 2}
   normalFace: {fileID: 2100000, guid: 34f66323bad5888449d48298d1a0927f, type: 2}
   damagedFace: {fileID: 2100000, guid: e5b17eff11a1ff5439237f806a519ae1, type: 2}
@@ -371,6 +370,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 1f569764428cd714abe8f5c85e3e9191, type: 2}
   - {fileID: 2100000, guid: bc860082cae95cc41959f588c9d95a15, type: 2}
   - {fileID: 2100000, guid: e511827ba665a9a4085f58020c925964, type: 2}
+  elementParticleList: []
+  damage: 15
+  attackRate: 0.25
+  attackTimer: 0
 --- !u!114 &7674671021754053427
 MonoBehaviour:
   m_ObjectHideFlags: 0
